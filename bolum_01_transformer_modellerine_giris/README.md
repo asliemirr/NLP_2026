@@ -4,10 +4,6 @@
 
 Bu klasör, [Hugging Face LLM Course](https://huggingface.co/learn/llm-course/chapter1/1) 1. bölümü (*Transformer Models*) için takımımızın Türkçe dokümantasyonunu, uygulama kodlarını, zafiyet testlerini ve sınav materyalini içerir.
 
-| Repo Kaptanı | Resmî Müfredat | Ana Depo | Çalışma Formatı |
-|---|---|---|---|
-| Himmet Can Umutlu | Hugging Face LLM Course, Bölüm 1 | [mesutpolatgil/NLP_2026](https://github.com/mesutpolatgil/NLP_2026) | Fork & PR · Slaytsız tahta savunması |
-
 ## İçindekiler
 
 1. [Takım ve Görev Dağılımı](#takim)
@@ -26,8 +22,6 @@ Bu klasör, [Hugging Face LLM Course](https://huggingface.co/learn/llm-course/ch
    - [1/9 · Önyargı ve sınırlamalar](#k1-9) — Abdulkadir Öcal
    - [1/10 · Ünite Özeti ve Transformer Cheat Sheet](#k1-10) — Özge Sayınbaş
    - [1/11 · Sertifika sınavı](#k1-11) — Sıla Taşan
-6. [Terim Sözlüğü](#terim-sozlugu)
-7. [Kaynak ve Lisans](#kaynaklar)
 
 ---
 
@@ -37,13 +31,11 @@ Bu klasör, [Hugging Face LLM Course](https://huggingface.co/learn/llm-course/ch
 
 | Üye | Rol | Zimmetli Konular | Çıktı |
 |---|---|---|---|
-| Abdulkadir Öcal | QA / Red-Teamer (Öğrenci 3) | 1/9 Önyargı ve Sınırlamalar | [`red_teaming_zafiyet.ipynb`](red_teaming_zafiyet.ipynb) |
-| Özge Sayınbaş | Dokümantasyon Yöneticisi & Çeviri Sorumlusu (Öğrenci 1) | 1/1 Giriş, 1/2 NLP ve LLM'ler, 1/10 Ünite Özeti | `README.md` (çeviri arşivi, teknik rehber, cheat sheet), nihai PR |
-| Simay Evin | Sistem Mimarı: Teori & Algoritma (Öğrenci 2) | 1/4 Transformer'lar Nasıl Çalışır?, 1/6 Transformer Mimarileri | `README.md` → Mimari ve Algoritma Analizi ([1/4](#k1-4), [1/6](#k1-6)) |
-| Himmet Can Umutlu | Repo Kaptanı & Uygulama Kodlama Mühendisi | 1/3 Transformer'lar Neler Yapabilir?, 1/5 Görev Çözümleri, 1/8 LLM ile Çıkarım | [`pipeline_ve_inference.ipynb`](pipeline_ve_inference.ipynb), PR koordinasyonu |
-| Sıla Taşan | Sınav Komiseri & Ölçme Değerlendirme (Öğrenci 4) | 1/7 Hızlı Quiz, 1/11 Sertifikasyon Sınavı | [`bolum_01_quiz_sinav.md`](bolum_01_quiz_sinav.md) |
-
-**Takımın genel liderliği ve test süreçlerinin denetimi:** Sıla Taşan · **PR koordinasyonu ve son onay:** Himmet Can Umutlu · **Nihai PR'ın gönderilmesi:** Özge Sayınbaş
+| Özge Sayınbaş | Dokümantasyon Yöneticisi & Çeviri Sorumlusu | 1/1 Giriş, 1/2 NLP ve LLM'ler, 1/10 Ünite Özeti | `README.md` (çeviri arşivi, teknik rehber, cheat sheet), nihai PR |
+| Himmet Can Umutlu | Uygulama Kodlama Mühendisi | 1/3 Transformer'lar Neler Yapabilir?, 1/5 Görev Çözümleri, 1/8 LLM ile Çıkarım | [`pipeline_ve_inference.ipynb`](pipeline_ve_inference.ipynb) |
+| Simay Evin | Sistem Mimarı: Teori & Algoritma | 1/4 Transformer'lar Nasıl Çalışır?, 1/6 Transformer Mimarileri | `README.md` → Mimari ve Algoritma Analizi ([1/4](#k1-4), [1/6](#k1-6)) |
+| Sıla Taşan | Sınav Komiseri & Ölçme Değerlendirme| 1/7 Hızlı Quiz, 1/11 Sertifikasyon Sınavı | [`bolum_01_quiz_sinav.md`](bolum_01_quiz_sinav.md) |
+| Abdulkadir Öcal | Red-Teamer | 1/9 Önyargı ve Sınırlamalar | [`red_teaming_zafiyet.ipynb`](red_teaming_zafiyet.ipynb) |
 
 ### Konu Eşleşme Matrisi
 
@@ -1801,79 +1793,3 @@ Halüsinasyon · gerçek anlama eksikliği · önyargı (ince ayar gidermez) · 
 **Hazırlayan:** Sıla Taşan (Sınav Komiseri & Ölçme Değerlendirme) · Dosya: [`bolum_01_quiz_sinav.md`](bolum_01_quiz_sinav.md)
 
 1/11 sertifikasyon sınavına ilişkin çalışma bu dosyadadır.
-
----
-
-<a id="terim-sozlugu"></a>
-
-## 6. Terim Sözlüğü
-
-Çeviride kullanılan terimler aşağıdadır. Yerleşik Türkçe karşılığı olan terimler çevrilmiş, ilk geçtiği yerde İngilizcesi parantez içinde verilmiştir. Türkçede yaygın olarak İngilizce kullanılan terimler (token, pipeline, checkpoint, encoder, decoder) olduğu gibi bırakılmış ve kesme işaretiyle çekimlenmiştir. Kod, API adları ve URL'ler çevrilmemiştir.
-
-| İngilizce | Türkçe |
-|---|---|
-| Attention | Dikkat |
-| Attention mask | Dikkat maskesi |
-| Auto-encoding model | Otokodlayıcı model |
-| Auto-regressive model | Otoregresif model |
-| Batch | Toplu (yığın) |
-| Beam search | Işın araması |
-| Bias | Önyargı |
-| Causal language modeling | Nedensel dil modelleme |
-| Checkpoint | Checkpoint (kontrol noktası) |
-| Context window / length | Bağlam penceresi / uzunluğu |
-| Cross-entropy loss | Çapraz entropi kaybı |
-| Dataset | Veri kümesi |
-| Decoder | Decoder (kod çözücü) |
-| Deployment | Kullanıma sunma / dağıtım |
-| Embedding | Gömme |
-| Emergent abilities | Ortaya çıkan yetenekler |
-| Encoder | Encoder (kodlayıcı) |
-| Feature | Öznitelik |
-| Feedforward network | İleri beslemeli ağ |
-| Few-shot learning | Az örnekle öğrenme |
-| Fine-tuning | İnce ayar |
-| Frequency / presence penalty | Sıklık / varlık cezası |
-| Hallucination | Halüsinasyon |
-| Head (classification head) | Başlık (sınıflandırma başlığı) |
-| Hidden state | Gizli durum |
-| In-context learning | Bağlam içi öğrenme |
-| Inference | Çıkarım |
-| Instruction tuning | Talimat ayarı |
-| Large Language Model (LLM) | Büyük Dil Modeli (LLM) |
-| Logit | Logit |
-| Masked language modeling | Maskeli dil modelleme |
-| Named entity recognition | Adlandırılmış varlık tanıma |
-| Natural language inference | Doğal dil çıkarımı |
-| Natural Language Processing | Doğal Dil İşleme (NLP) |
-| Patch | Yama |
-| Pipeline | Pipeline |
-| Positional encoding | Konumsal kodlama |
-| Prefill / Decode (phase) | Ön doldurma / Kod çözme (aşaması) |
-| Pretrained / Pretraining | Ön eğitimli / Ön eğitim |
-| Prompt / Prompting | İstem / İstem oluşturma |
-| Question answering | Soru yanıtlama |
-| Reasoning | Akıl yürütme |
-| Self-attention | Öz dikkat |
-| Self-supervised learning | Öz denetimli öğrenme |
-| Sentiment analysis | Duygu analizi |
-| Sequence-to-sequence | Diziden diziye |
-| Scaling laws | Ölçekleme yasaları |
-| Span | Aralık |
-| Summarization | Özetleme |
-| Temperature | Sıcaklık |
-| Token / Tokenizer | Token / Tokenizer |
-| Tokenization | Tokenizasyon |
-| Transfer learning | Transfer öğrenme |
-| Weights | Ağırlıklar |
-| Zero-shot | Sıfır atışlı (zero-shot) |
-
----
-
-<a id="kaynaklar"></a>
-
-## 7. Kaynak
-
-- Hugging Face LLM Course, Bölüm 1: https://huggingface.co/learn/llm-course/chapter1/1
-
-Çeviri içerikleri, orijinal kurs gibi [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) kapsamındadır. Orijinal metin © Hugging Face. Türkçe çeviri ve uyarlama NLP_2026 Bölüm 1 takımı tarafından hazırlanmıştır.
