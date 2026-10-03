@@ -6,22 +6,28 @@ Bu klasör, [Hugging Face LLM Course](https://huggingface.co/learn/llm-course/ch
 
 | Repo Kaptanı | Resmî Müfredat | Ana Depo | Çalışma Formatı |
 |---|---|---|---|
-| Mehmet Can Efe | Hugging Face LLM Course, Bölüm 1 | [mesutpolatgil/NLP_2026](https://github.com/mesutpolatgil/NLP_2026) | Fork & PR · Slaytsız tahta savunması |
+| Himmet Can Umutlu | Hugging Face LLM Course, Bölüm 1 | [mesutpolatgil/NLP_2026](https://github.com/mesutpolatgil/NLP_2026) | Fork & PR · Slaytsız tahta savunması |
 
 ## İçindekiler
 
 1. [Takım ve Görev Dağılımı](#takim)
 2. [Klasör Yapısı](#klasor-yapisi)
 3. [Ortam Kurulumu ve Çalıştırma](#kurulum)
-4. [Teknik Rehber: Ünitenin Özü](#teknik-rehber)
-5. [Mimari ve Algoritma Analizi](#mimari-analiz)
-6. [Uygulama: Pipeline ve Çıkarım Parametreleri](#uygulama)
-7. [Önyargı, Halüsinasyon ve Zafiyet Testleri](#zafiyet-testleri)
-8. [Quiz ve Sertifikasyon Sınavı](#quiz)
-9. [Transformer Cheat Sheet (Hızlı Başvuru Kartı)](#cheat-sheet)
-10. [Türkçe Çeviri Arşivi](#ceviri-arsivi)
-11. [Terim Sözlüğü](#terim-sozlugu)
-12. [Kaynaklar ve Lisans](#kaynaklar)
+4. [Ünite İçeriği (Kurs Sırasıyla)](#unite-icerigi)
+   - [1/1 · Giriş](#k1-1) — Özge Sayınbaş
+   - [1/2 · Doğal Dil İşleme ve Büyük Dil Modelleri](#k1-2) — Özge Sayınbaş
+   - [1/3 · Transformer'lar neler yapabilir?](#k1-3) — Himmet Can Umutlu
+   - [1/4 · Transformer'lar nasıl çalışır?](#k1-4) — Simay Evin
+   - [1/5 · 🤗 Transformer'lar görevleri nasıl çözer?](#k1-5) — Himmet Can Umutlu
+   - [1/6 · Transformer Mimarileri](#k1-6) — Simay Evin
+   - [1/7 · Kısa sınav](#k1-7) — Sıla Taşan
+   - [1/8 · LLM'lerle çıkarım](#k1-8) — Himmet Can Umutlu
+   - [1/9 · Önyargı ve sınırlamalar](#k1-9) — Kadir
+   - [1/10 · Ünite Özeti ve Transformer Cheat Sheet](#k1-10) — Özge Sayınbaş
+   - [1/11 · Sertifika sınavı](#k1-11) — Sıla Taşan
+5. [Türkçe Çeviri Arşivi](#ceviri-arsivi)
+6. [Terim Sözlüğü](#terim-sozlugu)
+7. [Kaynaklar ve Lisans](#kaynaklar)
 
 ---
 
@@ -31,11 +37,13 @@ Bu klasör, [Hugging Face LLM Course](https://huggingface.co/learn/llm-course/ch
 
 | Üye | Rol | Zimmetli Konular | Çıktı |
 |---|---|---|---|
-| Mehmet Can Efe | Repo Kaptanı & QA / Red-Teamer (Öğrenci 3) | 1/9 Önyargı ve Sınırlamalar | [`red_teaming_zafiyet.ipynb`](red_teaming_zafiyet.ipynb), PR koordinasyonu |
+| Kadir | QA / Red-Teamer (Öğrenci 3) | 1/9 Önyargı ve Sınırlamalar | [`red_teaming_zafiyet.ipynb`](red_teaming_zafiyet.ipynb) |
 | Özge Sayınbaş | Dokümantasyon Yöneticisi & Çeviri Sorumlusu (Öğrenci 1) | 1/1 Giriş, 1/2 NLP ve LLM'ler, 1/10 Ünite Özeti | `README.md` (çeviri arşivi, teknik rehber, cheat sheet), nihai PR |
-| Simay Evin | Sistem Mimarı: Teori & Algoritma (Öğrenci 2) | 1/4 Transformer'lar Nasıl Çalışır?, 1/6 Transformer Mimarileri | `README.md` → [Mimari ve Algoritma Analizi](#mimari-analiz) |
-| Himmet Can Umutlu | Uygulama & Kodlama Mühendisi | 1/3 Transformer'lar Neler Yapabilir?, 1/5 Görev Çözümleri, 1/8 LLM ile Çıkarım | [`pipeline_ve_inference.ipynb`](pipeline_ve_inference.ipynb) |
+| Simay Evin | Sistem Mimarı: Teori & Algoritma (Öğrenci 2) | 1/4 Transformer'lar Nasıl Çalışır?, 1/6 Transformer Mimarileri | `README.md` → Mimari ve Algoritma Analizi ([1/4](#k1-4), [1/6](#k1-6)) |
+| Himmet Can Umutlu | Repo Kaptanı & Uygulama Kodlama Mühendisi | 1/3 Transformer'lar Neler Yapabilir?, 1/5 Görev Çözümleri, 1/8 LLM ile Çıkarım | [`pipeline_ve_inference.ipynb`](pipeline_ve_inference.ipynb), PR koordinasyonu |
 | Sıla Taşan | Sınav Komiseri & Ölçme Değerlendirme (Öğrenci 4) | 1/7 Hızlı Quiz, 1/11 Sertifikasyon Sınavı | [`bolum_01_quiz_sinav.md`](bolum_01_quiz_sinav.md) |
+
+**Takımın genel liderliği ve test süreçlerinin denetimi:** Sıla Taşan · **PR koordinasyonu ve son onay:** Himmet Can Umutlu · **Nihai PR'ın gönderilmesi:** Özge Sayınbaş
 
 ### Konu Eşleşme Matrisi
 
@@ -49,8 +57,8 @@ Bu klasör, [Hugging Face LLM Course](https://huggingface.co/learn/llm-course/ch
 | 1/6 | Transformer Architectures | Simay Evin | Mimari tablo + `README.md` |
 | 1/7 | Quick quiz | Sıla Taşan | `bolum_01_quiz_sinav.md` |
 | 1/8 | Inference with LLMs | Himmet Can Umutlu | `pipeline_ve_inference.ipynb` |
-| 1/9 | Bias and limitations | Mehmet Can Efe | `red_teaming_zafiyet.ipynb` |
-| 1/10 | Summary | Özge Sayınbaş | Cheat Sheet (`README.md` içinde) |
+| 1/9 | Bias and limitations | Kadir | `red_teaming_zafiyet.ipynb` |
+| 1/10 | Summary | Özge Sayınbaş | Ünite özeti + Cheat Sheet (`README.md`) |
 | 1/11 | Certification exam | Sıla Taşan | `bolum_01_quiz_sinav.md` |
 
 <a id="klasor-yapisi"></a>
@@ -62,7 +70,7 @@ NLP_2026/
 └── bolum_01_transformer_modellerine_giris/
     ├── README.md                    # Özge Sayınbaş: Türkçe çeviri, teknik rehber, cheat sheet
     ├── pipeline_ve_inference.ipynb  # Himmet Can Umutlu: pipeline ve çıkarım parametreleri
-    ├── red_teaming_zafiyet.ipynb    # Mehmet Can Efe: halüsinasyon, önyargı ve zafiyet testleri
+    ├── red_teaming_zafiyet.ipynb    # Kadir: halüsinasyon, önyargı ve zafiyet testleri
     └── bolum_01_quiz_sinav.md       # Sıla Taşan: quiz, sınav soruları ve çözüm anahtarı
 ```
 
@@ -82,15 +90,27 @@ Ders kuralı gereği notebook'lar PR öncesinde **Restart & Run All** ile başta
 
 ---
 
-<a id="teknik-rehber"></a>
+<a id="unite-icerigi"></a>
 
-## 4. Teknik Rehber: Ünitenin Özü
+## 4. Ünite İçeriği (Kurs Sırasıyla)
 
-### 4.1 NLP ile LLM arasındaki ilişki (1/1)
+Bu bölüm, Hugging Face kursundaki alt bölümlerin sırasını izler. Her alt bölümün başında onu hazırlayan takım üyesinin adı yer alır.
+
+<a id="k1-1"></a>
+
+### 1/1 · Giriş
+
+**Hazırlayan:** Özge Sayınbaş (Dokümantasyon Yöneticisi & Çeviri Sorumlusu) · Teknik Rehber
 
 **NLP (Doğal Dil İşleme)**, bilgisayarların insan dilini anlamasını, yorumlamasını ve üretmesini sağlamaya odaklanan geniş bir alandır; duygu analizi, adlandırılmış varlık tanıma ve makine çevirisi gibi görevleri kapsar. **LLM'ler (Büyük Dil Modelleri)** ise devasa boyutları, kapsamlı eğitim verileri ve göreve özgü çok az eğitimle çok çeşitli dil görevlerini yerine getirebilmeleriyle öne çıkan, NLP modellerinin güçlü bir alt kümesidir. Llama, GPT ve Claude serisi bu modellere örnektir.
 
-### 4.2 Yaygın NLP görevleri (1/2)
+<a id="k1-2"></a>
+
+### 1/2 · Doğal Dil İşleme ve Büyük Dil Modelleri
+
+**Hazırlayan:** Özge Sayınbaş (Dokümantasyon Yöneticisi & Çeviri Sorumlusu) · Teknik Rehber
+
+#### Yaygın NLP görevleri
 
 | Görev | Kurstaki örnekler |
 |---|---|
@@ -102,7 +122,7 @@ Ders kuralı gereği notebook'lar PR öncesinde **Restart & Run All** ile başta
 
 NLP yalnızca yazılı metinle sınırlı değildir; ses kaydının yazıya dökülmesi veya bir görselin betimlenmesi gibi konuşma tanıma ve bilgisayarlı görü problemleriyle de ilgilenir.
 
-### 4.3 LLM'lerin özellikleri ve sınırlamaları (1/2)
+#### LLM'lerin özellikleri ve sınırlamaları
 
 | Belirleyici özellikler | Sınırlamalar |
 |---|---|
@@ -114,7 +134,99 @@ NLP yalnızca yazılı metinle sınırlı değildir; ses kaydının yazıya dök
 
 LLM'ler, her görev için ayrı model geliştirme yaklaşımını; istemlerle yönlendirilebilen veya ince ayar yapılabilen tek bir büyük model kullanma yaklaşımına dönüştürmüştür. Buna rağmen belirsizlik, kültürel bağlam, iğneleme ve mizahı anlamak hâlâ zorluk olmaya devam etmektedir.
 
-### 4.4 Ünitenin özeti (1/10)
+<a id="k1-3"></a>
+
+### 1/3 · Transformer'lar neler yapabilir?
+
+**Hazırlayan:** Himmet Can Umutlu (Repo Kaptanı & Uygulama Kodlama Mühendisi) · Notebook: [`pipeline_ve_inference.ipynb`](pipeline_ve_inference.ipynb)
+
+<!-- HIMMET CAN UMUTLU: Notebook'taki her bölüm için 1-2 cümlelik açıklamayı tabloya ekle. -->
+
+| Notebook bölümü | Açıklama |
+|---|---|
+| Sentiment Analysis | <!-- açıklama --> |
+| Zero-shot Classification | <!-- açıklama --> |
+| Text Generation | <!-- açıklama --> |
+| NER | <!-- açıklama --> |
+
+<a id="mimari-analiz"></a>
+<a id="k1-4"></a>
+
+### 1/4 · Transformer'lar nasıl çalışır?
+
+**Hazırlayan:** Simay Evin (Sistem Mimarı) · Mimari ve Algoritma Analizi
+
+<!-- SIMAY EVIN: Alt başlıkların altına kendi metnini ekle. -->
+
+#### Self-Attention ve Q, K, V matrisleri
+
+<!-- Ders planına göre: Sorgu (Query), Anahtar (Key), Değer (Value) matrislerinin anlamı ve QK^T / sqrt(d_k) formülünün açıklaması -->
+
+#### Transformer neden RNN/LSTM'den üstün? (Paralelleştirme)
+
+<!-- Sıralı işleme vs. paralel işleme, uzun mesafe bağımlılıkları -->
+
+#### Tahta şeması notları
+
+<!-- Tahtada çizilecek blok şemasının adımları -->
+
+<a id="k1-5"></a>
+
+### 1/5 · 🤗 Transformer'lar görevleri nasıl çözer?
+
+**Hazırlayan:** Himmet Can Umutlu (Repo Kaptanı & Uygulama Kodlama Mühendisi) · Notebook: [`pipeline_ve_inference.ipynb`](pipeline_ve_inference.ipynb)
+
+<!-- HIMMET CAN UMUTLU: 1/5 ile ilgili notebook bölümlerini ve açıklamalarını buraya ekle. -->
+
+<a id="k1-6"></a>
+
+### 1/6 · Transformer Mimarileri
+
+**Hazırlayan:** Simay Evin (Sistem Mimarı) · Mimari ve Algoritma Analizi
+
+#### Mimari aileleri karşılaştırma tablosu
+
+<!-- SIMAY EVIN: Encoder-only (BERT), Decoder-only (GPT), Encoder-Decoder (T5) tablosu -->
+
+<a id="k1-7"></a>
+
+### 1/7 · Kısa sınav
+
+**Hazırlayan:** Sıla Taşan (Sınav Komiseri & Ölçme Değerlendirme) · Dosya: [`bolum_01_quiz_sinav.md`](bolum_01_quiz_sinav.md)
+
+1/7 hızlı quiz sorularının Türkçe çevirisi, özgün akademik sorular ve çözüm anahtarı bu dosyadadır.
+
+<a id="k1-8"></a>
+
+### 1/8 · LLM'lerle çıkarım
+
+**Hazırlayan:** Himmet Can Umutlu (Repo Kaptanı & Uygulama Kodlama Mühendisi) · Notebook: [`pipeline_ve_inference.ipynb`](pipeline_ve_inference.ipynb)
+
+| Notebook bölümü | Açıklama |
+|---|---|
+| Temperature, Top-k, Top-p | <!-- açıklama + grafik yorumu --> |
+| Greedy Search vs. Beam Search | <!-- açıklama --> |
+
+<a id="zafiyet-testleri"></a>
+<a id="k1-9"></a>
+
+### 1/9 · Önyargı ve sınırlamalar
+
+**Hazırlayan:** Kadir (QA / Red-Teamer) · Notebook: [`red_teaming_zafiyet.ipynb`](red_teaming_zafiyet.ipynb)
+
+<!-- KADİR: Her testin amacını ve bulgusunu aşağıdaki tabloya ekle. -->
+
+| Test | Amaç | Bulgu |
+|---|---|---|
+| Mask filling cinsiyet/meslek önyargısı | <!-- --> | <!-- --> |
+| Halüsinasyon testi | <!-- --> | <!-- --> |
+| Prompt injection testi | <!-- --> | <!-- --> |
+
+<a id="k1-10"></a>
+
+### 1/10 · Ünite Özeti
+
+**Hazırlayan:** Özge Sayınbaş (Dokümantasyon Yöneticisi & Çeviri Sorumlusu) · Teknik Rehber
 
 Bu ünitede şunlar ele alındı:
 
@@ -124,86 +236,11 @@ Bu ünitede şunlar ele alındı:
 - **Modern LLM gelişmeleri:** Boyut ve yetenekteki büyüme, ölçekleme yasaları, özelleşmiş dikkat mekanizmaları, ön eğitim ve talimat ayarından oluşan iki aşamalı eğitim
 - **Pratik uygulamalar:** Hugging Face Hub'dan model bulmak, Inference API ile tarayıcıda test etmek, göreve uygun modeli seçmek
 
-Tüm bunların tek sayfalık özeti [Cheat Sheet](#cheat-sheet)'tedir.
-
----
-
-<a id="mimari-analiz"></a>
-
-## 5. Mimari ve Algoritma Analizi
-
-**Hazırlayan: Simay Evin (Sistem Mimarı)** · Kapsam: 1/4, 1/6
-
-<!-- SIMAY EVIN: Aşağıdaki alt başlıkların altına kendi metnini ekle. Başlıkları değiştirme; içindekiler ve cheat sheet bağlantıları bunlara göre kuruldu. -->
-
-### 5.1 Self-Attention ve Q, K, V matrisleri
-
-<!-- Ders planına göre: Sorgu (Query), Anahtar (Key), Değer (Value) matrislerinin anlamı ve QK^T / sqrt(d_k) formülünün açıklaması -->
-
-### 5.2 Transformer neden RNN/LSTM'den üstün? (Paralelleştirme)
-
-<!-- Sıralı işleme vs. paralel işleme, uzun mesafe bağımlılıkları -->
-
-### 5.3 Mimari aileleri karşılaştırma tablosu
-
-<!-- Encoder-only (BERT), Decoder-only (GPT), Encoder-Decoder (T5) tablosu -->
-
-### 5.4 Tahta şeması notları
-
-<!-- Tahtada çizilecek blok şemasının adımları -->
-
----
-
-<a id="uygulama"></a>
-
-## 6. Uygulama: Pipeline ve Çıkarım Parametreleri
-
-**Hazırlayan: Himmet Can Umutlu (Uygulama & Kodlama Mühendisi)** · Kapsam: 1/3, 1/5, 1/8 · Notebook: [`pipeline_ve_inference.ipynb`](pipeline_ve_inference.ipynb)
-
-<!-- HIMMET CAN UMUTLU: Notebook'taki her bölüm için 1-2 cümlelik açıklamayı aşağıdaki tabloya ekle. -->
-
-| Notebook bölümü | Konu | Açıklama |
-|---|---|---|
-| Sentiment Analysis | 1/3 | <!-- açıklama --> |
-| Zero-shot Classification | 1/3 | <!-- açıklama --> |
-| Text Generation | 1/3 | <!-- açıklama --> |
-| NER | 1/3 | <!-- açıklama --> |
-| Temperature, Top-k, Top-p | 1/8 | <!-- açıklama + grafik yorumu --> |
-| Greedy Search vs. Beam Search | 1/8 | <!-- açıklama --> |
-
----
-
-<a id="zafiyet-testleri"></a>
-
-## 7. Önyargı, Halüsinasyon ve Zafiyet Testleri
-
-**Hazırlayan: Mehmet Can Efe (Repo Kaptanı & QA / Red-Teamer)** · Kapsam: 1/9 · Notebook: [`red_teaming_zafiyet.ipynb`](red_teaming_zafiyet.ipynb)
-
-<!-- MEHMET CAN EFE: Her testin amacını ve bulgusunu aşağıdaki tabloya ekle. -->
-
-| Test | Amaç | Bulgu |
-|---|---|---|
-| Mask filling cinsiyet/meslek önyargısı | <!-- --> | <!-- --> |
-| Halüsinasyon testi | <!-- --> | <!-- --> |
-| Prompt injection testi | <!-- --> | <!-- --> |
-
----
-
-<a id="quiz"></a>
-
-## 8. Quiz ve Sertifikasyon Sınavı
-
-**Hazırlayan: Sıla Taşan (Sınav Komiseri)** · Kapsam: 1/7, 1/11 · Dosya: [`bolum_01_quiz_sinav.md`](bolum_01_quiz_sinav.md)
-
-Orijinal 1/7 hızlı quiz ve 1/11 sertifikasyon sınavı sorularının Türkçe çevirisi, 3 özgün akademik soru ve çözüm anahtarı bu dosyadadır.
-
----
-
 <a id="cheat-sheet"></a>
 
-## 9. Transformer Cheat Sheet (Hızlı Başvuru Kartı)c
+#### Transformer Cheat Sheet (Hızlı Başvuru Kartı)
 
-#### Üç mimari (1/6, 1/10)
+##### Üç mimari (1/6, 1/10)
 
 | | Encoder | Decoder | Encoder-Decoder |
 |---|---|---|---|
@@ -213,7 +250,7 @@ Orijinal 1/7 hızlı quiz ve 1/11 sertifikasyon sınavı sorularının Türkçe 
 | **Görevler** | Cümle sınıflandırma, NER, çıkarımsal QA | Metin üretimi, sohbet, yaratıcı yazım | Özetleme, çeviri, üretken QA |
 | **Örnekler** | BERT, DistilBERT, ModernBERT | GPT, LLaMA, Gemma, SmolLM | BART, T5, Marian, mBART |
 
-#### `pipeline()` (1/3)
+##### `pipeline()` (1/3)
 
 ```mermaid
 flowchart LR
@@ -222,7 +259,7 @@ flowchart LR
 
 `sentiment-analysis` · `zero-shot-classification` · `text-generation` · `fill-mask` · `ner` · `question-answering` · `summarization` · `translation`
 
-#### Transfer öğrenme (1/4)
+##### Transfer öğrenme (1/4)
 
 ```mermaid
 flowchart LR
@@ -232,7 +269,7 @@ flowchart LR
 
 **Mimari** = iskelet · **Checkpoint** = ağırlıklar · **Dikkat** = kelimenin temsili için cümledeki ilgili kelimelere odaklanma (standart maliyet O(n²))
 
-#### LLM çıkarımı (1/8)
+##### LLM çıkarımı (1/8)
 
 ```mermaid
 flowchart LR
@@ -248,15 +285,23 @@ flowchart LR
 
 **Metrikler:** TTFT · TPOT · Verim · VRAM · **KV önbellek** üretimi hızlandırır
 
-#### Sınırlar (1/2, 1/9)
+##### Sınırlar (1/2, 1/9)
 
 Halüsinasyon · gerçek anlama eksikliği · önyargı (ince ayar gidermez) · sınırlı bağlam penceresi · yüksek hesaplama ihtiyacı
+
+<a id="k1-11"></a>
+
+### 1/11 · Sertifika sınavı
+
+**Hazırlayan:** Sıla Taşan (Sınav Komiseri & Ölçme Değerlendirme) · Dosya: [`bolum_01_quiz_sinav.md`](bolum_01_quiz_sinav.md)
+
+1/11 sertifikasyon sınavına ilişkin çalışma bu dosyadadır.
 
 ---
 
 <a id="ceviri-arsivi"></a>
 
-## 10. Türkçe Çeviri Arşivi
+## 5. Türkçe Çeviri Arşivi
 
 Hugging Face LLM Course 1. bölümünün resmî Türkçe çevirisidir. Çeviri kaynağa birebir sadıktır; kod blokları, çıktılar, bağlantılar ve görseller orijinaliyle aynıdır. Her başlığa tıklayarak ilgili alt bölümü açabilirsiniz. 1/7 ve 1/11 sınav bölümleri [`bolum_01_quiz_sinav.md`](bolum_01_quiz_sinav.md) dosyasında yer alır.
 
@@ -1761,7 +1806,7 @@ Bu bölümde oluşturduğunuz temel, sonraki kısımlarda daha ileri düzey konu
 
 <a id="terim-sozlugu"></a>
 
-## 11. Terim Sözlüğü
+## 6. Terim Sözlüğü
 
 Çeviride kullanılan terimler aşağıdadır. Yerleşik Türkçe karşılığı olan terimler çevrilmiş, ilk geçtiği yerde İngilizcesi parantez içinde verilmiştir. Türkçede yaygın olarak İngilizce kullanılan terimler (token, pipeline, checkpoint, encoder, decoder) olduğu gibi bırakılmış ve kesme işaretiyle çekimlenmiştir. Kod, API adları ve URL'ler çevrilmemiştir.
 
@@ -1827,10 +1872,9 @@ Bu bölümde oluşturduğunuz temel, sonraki kısımlarda daha ileri düzey konu
 
 <a id="kaynaklar"></a>
 
-## 12. Kaynaklar ve Lisans
+## 7. Kaynak
 
 - Hugging Face LLM Course, Bölüm 1: https://huggingface.co/learn/llm-course/chapter1/1
-- Kursun kaynak deposu: https://github.com/huggingface/course
-- Vaswani vd. (2017), *Attention Is All You Need*: https://arxiv.org/abs/1706.03762
+
 
 Çeviri içerikleri, orijinal kurs gibi [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) kapsamındadır. Orijinal metin © Hugging Face. Türkçe çeviri ve uyarlama NLP_2026 Bölüm 1 takımı tarafından hazırlanmıştır.
