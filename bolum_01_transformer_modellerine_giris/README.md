@@ -10,7 +10,7 @@ Bu klasör, [Hugging Face LLM Course](https://huggingface.co/learn/llm-course/ch
 2. [Klasör Yapısı](#klasor-yapisi)
 3. [Ortam Kurulumu ve Çalıştırma](#kurulum)
 4. [Türkçe Çeviri Arşivi](#ceviri-arsivi)
-5. [Ünite İçeriği (Kurs Sırasıyla)](#unite-icerigi)
+5. [Ünite İçeriği ](#unite-icerigi)
    - [1/1 · Giriş](#k1-1) — Özge Sayınbaş
    - [1/2 · Doğal Dil İşleme ve Büyük Dil Modelleri](#k1-2) — Özge Sayınbaş
    - [1/3 · Transformer'lar neler yapabilir?](#k1-3) — Himmet Can Umutlu
