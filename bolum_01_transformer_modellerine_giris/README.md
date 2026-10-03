@@ -75,19 +75,19 @@ Bu bölümde takım üyelerinin teorik notları ve kod açıklamaları, Hugging 
 
 ### 1/1 · Giriş
 
-**Hazırlayan:** Özge Sayınbaş (Dokümantasyon Yöneticisi & Çeviri Sorumlusu) · Türkçe çeviri: [`turkce_ceviri.md` → 1/1](turkce_ceviri.md#bolum-1)
+**Hazırlayan:** Özge Sayınbaş (Dokümantasyon Yöneticisi & Çeviri Sorumlusu) 
 
 <a id="k1-2"></a>
 
 ### 1/2 · Doğal Dil İşleme ve Büyük Dil Modelleri
 
-**Hazırlayan:** Özge Sayınbaş (Dokümantasyon Yöneticisi & Çeviri Sorumlusu) · Türkçe çeviri: [`turkce_ceviri.md` → 1/2](turkce_ceviri.md#bolum-2)
+**Hazırlayan:** Özge Sayınbaş (Dokümantasyon Yöneticisi & Çeviri Sorumlusu)
 
 <a id="k1-3"></a>
 
 ### 1/3 · Transformer'lar neler yapabilir?
 
-**Hazırlayan:** Himmet Can Umutlu (Repo Kaptanı & Uygulama Kodlama Mühendisi) · Notebook: [`pipeline_ve_inference.ipynb`](pipeline_ve_inference.ipynb)
+**Hazırlayan:** Himmet Can Umutlu (Uygulama Kodlama Mühendisi) 
 
 <!-- HIMMET CAN UMUTLU: Notebook'taki her bölüm için 1-2 cümlelik açıklamayı tabloya ekle. -->
 
@@ -123,7 +123,7 @@ Bu bölümde takım üyelerinin teorik notları ve kod açıklamaları, Hugging 
 
 ### 1/5 · 🤗 Transformer'lar görevleri nasıl çözer?
 
-**Hazırlayan:** Himmet Can Umutlu (Repo Kaptanı & Uygulama Kodlama Mühendisi) · Notebook: [`pipeline_ve_inference.ipynb`](pipeline_ve_inference.ipynb)
+**Hazırlayan:** Himmet Can Umutlu (Uygulama Kodlama Mühendisi) 
 
 <!-- HIMMET CAN UMUTLU: 1/5 ile ilgili notebook bölümlerini ve açıklamalarını buraya ekle. -->
 
@@ -141,7 +141,7 @@ Bu bölümde takım üyelerinin teorik notları ve kod açıklamaları, Hugging 
 
 ### 1/8 · LLM'lerle çıkarım
 
-**Hazırlayan:** Himmet Can Umutlu (Repo Kaptanı & Uygulama Kodlama Mühendisi) · Notebook: [`pipeline_ve_inference.ipynb`](pipeline_ve_inference.ipynb)
+**Hazırlayan:** Himmet Can Umutlu (Uygulama Kodlama Mühendisi) 
 
 | Notebook bölümü | Açıklama |
 |---|---|
@@ -153,7 +153,7 @@ Bu bölümde takım üyelerinin teorik notları ve kod açıklamaları, Hugging 
 
 ### 1/9 · Önyargı ve sınırlamalar
 
-**Hazırlayan:** Abdulkadir Öcal (QA / Red-Teamer) · Notebook: [`red_teaming_zafiyet.ipynb`](red_teaming_zafiyet.ipynb)
+**Hazırlayan:** Abdulkadir Öcal (Red-Teamer) 
 
 <!-- ABDULKADİR ÖCAL: Her testin amacını ve bulgusunu aşağıdaki tabloya ekle. -->
 
@@ -167,4 +167,4 @@ Bu bölümde takım üyelerinin teorik notları ve kod açıklamaları, Hugging 
 
 ### 1/10 · Ünite Özeti
 
-**Hazırlayan:** Özge Sayınbaş (Dokümantasyon Yöneticisi & Çeviri Sorumlusu) · Türkçe çeviri: [`turkce_ceviri.md` → 1/10](turkce_ceviri.md#bolum-10) · Cheat Sheet: [`cheat_sheet.md`](cheat_sheet.md)
+**Hazırlayan:** Özge Sayınbaş (Dokümantasyon Yöneticisi & Çeviri Sorumlusu) 
