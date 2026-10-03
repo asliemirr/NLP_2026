@@ -41,7 +41,7 @@ Kurs tamamen ücretsizdir ve reklam içermez.
 Bu kurs başlangıçta NLP'ye (Doğal Dil İşleme) odaklanmış olsa da zamanla, alandaki en son gelişmeyi temsil eden Büyük Dil Modellerini (LLM'ler) ön plana çıkaracak şekilde evrilmiştir.
 
 **Aradaki fark nedir?**
-- **NLP (Doğal Dil İşleme)**, bilgisayarların insan dilini anlamasını, yorumlamasını ve üretmesini sağlamaya odaklanan daha geniş bir alandır. NLP; duygu analizi, adlandırılmış varlık tanıma ve makine çevirisi gibi pek çok teknik ve görevi kapsar.
+- **NLP (Doğal Dil İşleme)**, bilgisayarların insan dilini anlamasını, yorumlamasını ve üretmesini sağlamaya odaklanan daha geniş bir alandır. NLP; duygu analizi (sentiment analysis), adlandırılmış varlık tanıma (named entity recognition) ve makine çevirisi (machine translation) gibi pek çok teknik ve görevi kapsar.
 - **LLM'ler (Büyük Dil Modelleri)**, devasa boyutları, kapsamlı eğitim verileri ve göreve özgü çok az eğitimle geniş bir yelpazedeki dil görevlerini yerine getirebilme yetenekleriyle öne çıkan, NLP modellerinin güçlü bir alt kümesidir. Llama, GPT veya Claude serisi gibi modeller, NLP'de mümkün olanın sınırlarını kökten değiştiren LLM örnekleridir.
 
 NLP'nin temellerini anlamak LLM'lerle verimli çalışabilmek için kritik önem taşıdığından, bu kurs boyunca hem geleneksel NLP kavramlarını hem de en güncel LLM tekniklerini öğreneceksiniz.
@@ -54,7 +54,7 @@ Kursa kısa bir genel bakış:
 <img src="https://huggingface.co/datasets/huggingface-course/documentation-images/resolve/main/en/chapter1/summary.svg" alt="Kurs bölümlerine kısa bir genel bakış.">
 </div>
 
-- 1. ile 4. bölümler, 🤗 Transformers kütüphanesinin temel kavramlarına giriş niteliğindedir. Kursun bu kısmının sonunda Transformer modellerinin nasıl çalıştığını öğrenmiş olacak; [Hugging Face Hub](https://huggingface.co/models)'dan bir modeli nasıl kullanacağınızı, bir veri kümesi üzerinde nasıl ince ayar (fine-tuning) yapacağınızı ve sonuçlarınızı Hub'da nasıl paylaşacağınızı bileceksiniz!
+- 1. ile 4. bölümler, 🤗 Transformers kütüphanesinin temel kavramlarına giriş niteliğindedir. Kursun bu kısmının sonunda Transformer modellerinin nasıl çalıştığını öğrenmiş olacak; [Hugging Face Hub](https://huggingface.co/models)'dan bir modeli nasıl kullanacağınızı, bir veri kümesi (dataset) üzerinde nasıl ince ayar (fine-tuning) yapacağınızı ve sonuçlarınızı Hub'da nasıl paylaşacağınızı bileceksiniz!
 - 5. ile 8. bölümler, klasik NLP görevlerine ve LLM tekniklerine geçmeden önce 🤗 Datasets ve 🤗 Tokenizers kütüphanelerinin temellerini öğretir. Bu kısmın sonunda en yaygın dil işleme problemlerini kendi başınıza çözebilecek hâle geleceksiniz.
 - 9. bölüm, NLP'nin ötesine geçerek modellerinize ait demoları 🤗 Hub üzerinde nasıl oluşturup paylaşacağınızı ele alır. Bu kısmın sonunda 🤗 Transformers uygulamanızı dünyaya sergilemeye hazır olacaksınız!
 - 10. ile 12. bölümler; ince ayar, yüksek kaliteli veri kümelerinin derlenmesi ve akıl yürütme (reasoning) modellerinin oluşturulması gibi ileri düzey LLM konularına odaklanır.
@@ -199,7 +199,7 @@ Aşağıda yaygın NLP görevlerinin bir listesi, her birine ait birkaç örnekl
 - **Bir metinden yanıt çıkarma**: Bir soru ve bağlam verildiğinde, bağlamda sunulan bilgilere dayanarak sorunun yanıtını çıkarmak
 - **Bir girdi metninden yeni bir cümle üretme**: Bir metni başka bir dile çevirmek, bir metni özetlemek
 
-Bununla birlikte NLP yalnızca yazılı metinle sınırlı değildir. Bir ses kaydının yazıya dökülmesi (transkripsiyon) veya bir görselin betimlemesinin oluşturulması gibi konuşma tanıma ve bilgisayarlı görü alanlarındaki karmaşık problemlerle de ilgilenir.
+Bununla birlikte NLP yalnızca yazılı metinle sınırlı değildir. Bir ses kaydının yazıya dökülmesi (transkripsiyon) veya bir görselin betimlemesinin oluşturulması gibi konuşma tanıma (speech recognition) ve bilgisayarlı görü (computer vision) alanlarındaki karmaşık problemlerle de ilgilenir.
 
 ### Büyük Dil Modellerinin (LLM'ler) Yükselişi
 
@@ -217,10 +217,10 @@ LLM'lerin belirleyici özellikleri şunlardır:
 LLM'lerin ortaya çıkışı, belirli NLP görevleri için özelleşmiş modeller geliştirme yaklaşımını; istemlerle yönlendirilebilen veya ince ayar yapılarak çok çeşitli dil görevlerine uyarlanabilen tek bir büyük model kullanma yaklaşımına dönüştürerek bir paradigma değişimine yol açmıştır. Bu durum gelişmiş dil işlemeyi daha erişilebilir kılarken verimlilik, etik ve dağıtım (deployment) gibi alanlarda yeni zorlukları da beraberinde getirmiştir.
 
 Ancak LLM'lerin önemli sınırlamaları da vardır:
-- **Halüsinasyonlar**: Yanlış bilgileri kendinden emin bir şekilde üretebilirler
+- **Halüsinasyonlar (hallucinations)**: Yanlış bilgileri kendinden emin bir şekilde üretebilirler
 - **Gerçek anlama eksikliği**: Dünyayı gerçek anlamda kavrayamazlar ve tamamen istatistiksel örüntüler üzerinden çalışırlar
-- **Önyargı**: Eğitim verilerinde veya girdilerde bulunan önyargıları yeniden üretebilirler
-- **Bağlam pencereleri**: Sınırlı bağlam pencerelerine sahiptirler (her ne kadar bu durum iyileşmekte olsa da)
+- **Önyargı (bias)**: Eğitim verilerinde veya girdilerde bulunan önyargıları yeniden üretebilirler
+- **Bağlam pencereleri (context windows)**: Sınırlı bağlam pencerelerine sahiptirler (her ne kadar bu durum iyileşmekte olsa da)
 - **Hesaplama kaynakları**: Ciddi miktarda hesaplama kaynağı gerektirirler
 
 ### Dil işleme neden zordur?
@@ -412,7 +412,7 @@ Bir modele tıklayarak onu seçtiğinizde, modeli doğrudan çevrim içi olarak 
 > [!TIP]
 > ✏️ **Deneyin!** Filtreleri kullanarak başka bir dil için bir metin üretim modeli bulun. Widget ile dilediğiniz gibi denemeler yapın ve modeli bir pipeline'da kullanın!
 
-#### Çıkarım Sağlayıcıları (Inference Providers)
+#### Inference Providers (Çıkarım Sağlayıcıları)
 
 Tüm modeller, Hugging Face [web sitesinde](https://huggingface.co/docs/inference-providers/en/index) sunulan Inference Providers (Çıkarım Sağlayıcıları) aracılığıyla doğrudan tarayıcınız üzerinden test edilebilir. Bu sayfada kendi metninizi girerek ve modelin girdi verilerini nasıl işlediğini izleyerek modelle doğrudan denemeler yapabilirsiniz.
 
@@ -748,7 +748,7 @@ Bu kısımda Transformer modelinin genel mimarisini ele alacağız. Bazı kavram
 
 Model temel olarak iki bloktan oluşur:
 
-* **Encoder (Kodlayıcı — sol)**: Encoder bir girdi alır ve bu girdinin bir temsilini (özniteliklerini) oluşturur. Bu, modelin girdiden anlam çıkarmak üzere optimize edildiği anlamına gelir.
+* **Encoder (Kodlayıcı — sol)**: Encoder bir girdi alır ve bu girdinin bir temsilini (özniteliklerini, features) oluşturur. Bu, modelin girdiden anlam çıkarmak üzere optimize edildiği anlamına gelir.
 * **Decoder (Kod çözücü — sağ)**: Decoder, bir hedef dizi üretmek için encoder'ın temsilini (özniteliklerini) diğer girdilerle birlikte kullanır. Bu, modelin çıktı üretmek üzere optimize edildiği anlamına gelir.
 
 <div class="flex justify-center">
@@ -818,9 +818,9 @@ Görevlerin nasıl çözüldüğünü açıklamak için, faydalı tahminler üre
 
 - Ses sınıflandırma ve otomatik konuşma tanıma (ASR) için [Wav2Vec2](https://huggingface.co/docs/transformers/model_doc/wav2vec2)
 - Görüntü sınıflandırma için [Vision Transformer (ViT)](https://huggingface.co/docs/transformers/model_doc/vit) ve [ConvNeXT](https://huggingface.co/docs/transformers/model_doc/convnext)
-- Nesne tespiti için [DETR](https://huggingface.co/docs/transformers/model_doc/detr)
+- Nesne tespiti (object detection) için [DETR](https://huggingface.co/docs/transformers/model_doc/detr)
 - Görüntü bölütleme (segmentasyon) için [Mask2Former](https://huggingface.co/docs/transformers/model_doc/mask2former)
-- Derinlik tahmini için [GLPN](https://huggingface.co/docs/transformers/model_doc/glpn)
+- Derinlik tahmini (depth estimation) için [GLPN](https://huggingface.co/docs/transformers/model_doc/glpn)
 - Metin sınıflandırma, token sınıflandırma ve soru yanıtlama gibi encoder kullanan NLP görevleri için [BERT](https://huggingface.co/docs/transformers/model_doc/bert)
 - Metin üretimi gibi decoder kullanan NLP görevleri için [GPT2](https://huggingface.co/docs/transformers/model_doc/gpt2)
 - Özetleme ve çeviri gibi encoder-decoder kullanan NLP görevleri için [BART](https://huggingface.co/docs/transformers/model_doc/bart)
@@ -1480,7 +1480,7 @@ Bir sonraki token'ı tahmin etmek için en alakalı kelimeleri belirleme süreci
 
 Artık dikkati anladığımıza göre, bir LLM'in gerçekte ne kadar bağlamı işleyebildiğini inceleyelim. Bu da bizi bağlam uzunluğuna, yani modelin "dikkat kapsamına" getiriyor.
 
-Bağlam uzunluğu, LLM'in bir kerede işleyebileceği maksimum token (kelime veya kelime parçası) sayısını ifade eder. Bunu modelin çalışma belleğinin boyutu olarak düşünebilirsiniz.
+Bağlam uzunluğu (context length), LLM'in bir kerede işleyebileceği maksimum token (kelime veya kelime parçası) sayısını ifade eder. Bunu modelin çalışma belleğinin boyutu olarak düşünebilirsiniz.
 
 Bu yetenekler çeşitli pratik faktörlerle sınırlıdır:
 - Modelin mimarisi ve boyutu
