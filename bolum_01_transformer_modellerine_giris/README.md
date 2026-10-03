@@ -13,7 +13,8 @@ Bu klasör, [Hugging Face LLM Course](https://huggingface.co/learn/llm-course/ch
 1. [Takım ve Görev Dağılımı](#takim)
 2. [Klasör Yapısı](#klasor-yapisi)
 3. [Ortam Kurulumu ve Çalıştırma](#kurulum)
-4. [Ünite İçeriği (Kurs Sırasıyla)](#unite-icerigi)
+4. [Türkçe Çeviri Arşivi](#ceviri-arsivi)
+5. [Ünite İçeriği (Kurs Sırasıyla)](#unite-icerigi)
    - [1/1 · Giriş](#k1-1) — Özge Sayınbaş
    - [1/2 · Doğal Dil İşleme ve Büyük Dil Modelleri](#k1-2) — Özge Sayınbaş
    - [1/3 · Transformer'lar neler yapabilir?](#k1-3) — Himmet Can Umutlu
@@ -25,9 +26,8 @@ Bu klasör, [Hugging Face LLM Course](https://huggingface.co/learn/llm-course/ch
    - [1/9 · Önyargı ve sınırlamalar](#k1-9) — Abdulkadir Öcal
    - [1/10 · Ünite Özeti ve Transformer Cheat Sheet](#k1-10) — Özge Sayınbaş
    - [1/11 · Sertifika sınavı](#k1-11) — Sıla Taşan
-5. [Türkçe Çeviri Arşivi](#ceviri-arsivi)
 6. [Terim Sözlüğü](#terim-sozlugu)
-7. [Kaynaklar ve Lisans](#kaynaklar)
+7. [Kaynak ve Lisans](#kaynaklar)
 
 ---
 
@@ -57,7 +57,7 @@ Bu klasör, [Hugging Face LLM Course](https://huggingface.co/learn/llm-course/ch
 | 1/6 | Transformer Architectures | Simay Evin | Mimari tablo + `README.md` |
 | 1/7 | Quick quiz | Sıla Taşan | `bolum_01_quiz_sinav.md` |
 | 1/8 | Inference with LLMs | Himmet Can Umutlu | `pipeline_ve_inference.ipynb` |
-| 1/9 | Bias and limitations | Kadir | `red_teaming_zafiyet.ipynb` |
+| 1/9 | Bias and limitations | Abdulkadir Öcal | `red_teaming_zafiyet.ipynb` |
 | 1/10 | Summary | Özge Sayınbaş | Ünite özeti + Cheat Sheet (`README.md`) |
 | 1/11 | Certification exam | Sıla Taşan | `bolum_01_quiz_sinav.md` |
 
@@ -70,7 +70,7 @@ NLP_2026/
 └── bolum_01_transformer_modellerine_giris/
     ├── README.md                    # Özge Sayınbaş: Türkçe çeviri, teknik rehber, cheat sheet
     ├── pipeline_ve_inference.ipynb  # Himmet Can Umutlu: pipeline ve çıkarım parametreleri
-    ├── red_teaming_zafiyet.ipynb    # Kadir: halüsinasyon, önyargı ve zafiyet testleri
+    ├── red_teaming_zafiyet.ipynb    # Abdulkadir Öcal: halüsinasyon, önyargı ve zafiyet testleri
     └── bolum_01_quiz_sinav.md       # Sıla Taşan: quiz, sınav soruları ve çözüm anahtarı
 ```
 
@@ -90,218 +90,9 @@ Ders kuralı gereği notebook'lar PR öncesinde **Restart & Run All** ile başta
 
 ---
 
-<a id="unite-icerigi"></a>
-
-## 4. Ünite İçeriği (Kurs Sırasıyla)
-
-Bu bölüm, Hugging Face kursundaki alt bölümlerin sırasını izler. Her alt bölümün başında onu hazırlayan takım üyesinin adı yer alır.
-
-<a id="k1-1"></a>
-
-### 1/1 · Giriş
-
-**Hazırlayan:** Özge Sayınbaş (Dokümantasyon Yöneticisi & Çeviri Sorumlusu) · Teknik Rehber
-
-**NLP (Doğal Dil İşleme)**, bilgisayarların insan dilini anlamasını, yorumlamasını ve üretmesini sağlamaya odaklanan geniş bir alandır; duygu analizi, adlandırılmış varlık tanıma ve makine çevirisi gibi görevleri kapsar. **LLM'ler (Büyük Dil Modelleri)** ise devasa boyutları, kapsamlı eğitim verileri ve göreve özgü çok az eğitimle çok çeşitli dil görevlerini yerine getirebilmeleriyle öne çıkan, NLP modellerinin güçlü bir alt kümesidir. Llama, GPT ve Claude serisi bu modellere örnektir.
-
-<a id="k1-2"></a>
-
-### 1/2 · Doğal Dil İşleme ve Büyük Dil Modelleri
-
-**Hazırlayan:** Özge Sayınbaş (Dokümantasyon Yöneticisi & Çeviri Sorumlusu) · Teknik Rehber
-
-#### Yaygın NLP görevleri
-
-| Görev | Kurstaki örnekler |
-|---|---|
-| Cümlelerin bütün olarak sınıflandırılması | Yorumun duygu durumu, e-postanın spam olup olmadığı, cümlenin dil bilgisi açısından doğruluğu, iki cümlenin mantıksal ilişkisi |
-| Cümledeki her kelimenin sınıflandırılması | Dil bilgisel öğeler (isim, fiil, sıfat) veya adlandırılmış varlıklar (kişi, konum, kurum) |
-| Metin içeriği üretme | İstemi otomatik üretilen metinle tamamlama, maskelenmiş kelimelerle boşluk doldurma |
-| Metinden yanıt çıkarma | Soru ve bağlam verildiğinde yanıtı bağlamdan çıkarma |
-| Girdi metninden yeni cümle üretme | Çeviri, özetleme |
-
-NLP yalnızca yazılı metinle sınırlı değildir; ses kaydının yazıya dökülmesi veya bir görselin betimlenmesi gibi konuşma tanıma ve bilgisayarlı görü problemleriyle de ilgilenir.
-
-#### LLM'lerin özellikleri ve sınırlamaları
-
-| Belirleyici özellikler | Sınırlamalar |
-|---|---|
-| **Ölçek:** Milyonlarca, milyarlarca, hatta yüz milyarlarca parametre | **Halüsinasyon:** Yanlış bilgiyi kendinden emin şekilde üretebilir |
-| **Genel yetenekler:** Göreve özgü eğitim olmadan birden fazla görev | **Gerçek anlama eksikliği:** Tamamen istatistiksel örüntülerle çalışır |
-| **Bağlam içi öğrenme:** İstemdeki örneklerden öğrenme | **Önyargı:** Eğitim verisindeki önyargıyı yeniden üretebilir |
-| **Ortaya çıkan yetenekler:** Model büyüdükçe öngörülmemiş yetenekler | **Bağlam penceresi:** Sınırlıdır (iyileşmekte olsa da) |
-| | **Hesaplama kaynakları:** Ciddi kaynak gerektirir |
-
-LLM'ler, her görev için ayrı model geliştirme yaklaşımını; istemlerle yönlendirilebilen veya ince ayar yapılabilen tek bir büyük model kullanma yaklaşımına dönüştürmüştür. Buna rağmen belirsizlik, kültürel bağlam, iğneleme ve mizahı anlamak hâlâ zorluk olmaya devam etmektedir.
-
-<a id="k1-3"></a>
-
-### 1/3 · Transformer'lar neler yapabilir?
-
-**Hazırlayan:** Himmet Can Umutlu (Repo Kaptanı & Uygulama Kodlama Mühendisi) · Notebook: [`pipeline_ve_inference.ipynb`](pipeline_ve_inference.ipynb)
-
-<!-- HIMMET CAN UMUTLU: Notebook'taki her bölüm için 1-2 cümlelik açıklamayı tabloya ekle. -->
-
-| Notebook bölümü | Açıklama |
-|---|---|
-| Sentiment Analysis | <!-- açıklama --> |
-| Zero-shot Classification | <!-- açıklama --> |
-| Text Generation | <!-- açıklama --> |
-| NER | <!-- açıklama --> |
-
-<a id="mimari-analiz"></a>
-<a id="k1-4"></a>
-
-### 1/4 · Transformer'lar nasıl çalışır?
-
-**Hazırlayan:** Simay Evin (Sistem Mimarı) · Mimari ve Algoritma Analizi
-
-<!-- SIMAY EVIN: Alt başlıkların altına kendi metnini ekle. -->
-
-#### Self-Attention ve Q, K, V matrisleri
-
-<!-- Ders planına göre: Sorgu (Query), Anahtar (Key), Değer (Value) matrislerinin anlamı ve QK^T / sqrt(d_k) formülünün açıklaması -->
-
-#### Transformer neden RNN/LSTM'den üstün? (Paralelleştirme)
-
-<!-- Sıralı işleme vs. paralel işleme, uzun mesafe bağımlılıkları -->
-
-#### Tahta şeması notları
-
-<!-- Tahtada çizilecek blok şemasının adımları -->
-
-<a id="k1-5"></a>
-
-### 1/5 · 🤗 Transformer'lar görevleri nasıl çözer?
-
-**Hazırlayan:** Himmet Can Umutlu (Repo Kaptanı & Uygulama Kodlama Mühendisi) · Notebook: [`pipeline_ve_inference.ipynb`](pipeline_ve_inference.ipynb)
-
-<!-- HIMMET CAN UMUTLU: 1/5 ile ilgili notebook bölümlerini ve açıklamalarını buraya ekle. -->
-
-<a id="k1-6"></a>
-
-### 1/6 · Transformer Mimarileri
-
-**Hazırlayan:** Simay Evin (Sistem Mimarı) · Mimari ve Algoritma Analizi
-
-#### Mimari aileleri karşılaştırma tablosu
-
-<!-- SIMAY EVIN: Encoder-only (BERT), Decoder-only (GPT), Encoder-Decoder (T5) tablosu -->
-
-<a id="k1-7"></a>
-
-### 1/7 · Kısa sınav
-
-**Hazırlayan:** Sıla Taşan (Sınav Komiseri & Ölçme Değerlendirme) · Dosya: [`bolum_01_quiz_sinav.md`](bolum_01_quiz_sinav.md)
-
-1/7 hızlı quiz sorularının Türkçe çevirisi, özgün akademik sorular ve çözüm anahtarı bu dosyadadır.
-
-<a id="k1-8"></a>
-
-### 1/8 · LLM'lerle çıkarım
-
-**Hazırlayan:** Himmet Can Umutlu (Repo Kaptanı & Uygulama Kodlama Mühendisi) · Notebook: [`pipeline_ve_inference.ipynb`](pipeline_ve_inference.ipynb)
-
-| Notebook bölümü | Açıklama |
-|---|---|
-| Temperature, Top-k, Top-p | <!-- açıklama + grafik yorumu --> |
-| Greedy Search vs. Beam Search | <!-- açıklama --> |
-
-<a id="zafiyet-testleri"></a>
-<a id="k1-9"></a>
-
-### 1/9 · Önyargı ve sınırlamalar
-
-**Hazırlayan:** Kadir (QA / Red-Teamer) · Notebook: [`red_teaming_zafiyet.ipynb`](red_teaming_zafiyet.ipynb)
-
-<!-- KADİR: Her testin amacını ve bulgusunu aşağıdaki tabloya ekle. -->
-
-| Test | Amaç | Bulgu |
-|---|---|---|
-| Mask filling cinsiyet/meslek önyargısı | <!-- --> | <!-- --> |
-| Halüsinasyon testi | <!-- --> | <!-- --> |
-| Prompt injection testi | <!-- --> | <!-- --> |
-
-<a id="k1-10"></a>
-
-### 1/10 · Ünite Özeti
-
-**Hazırlayan:** Özge Sayınbaş (Dokümantasyon Yöneticisi & Çeviri Sorumlusu) · Teknik Rehber
-
-Bu ünitede şunlar ele alındı:
-
-- **NLP ve LLM'ler:** NLP'nin sınıflandırmadan üretime uzanan görevleri ve LLM'lerin bu alanı nasıl dönüştürdüğü
-- **Transformer yetenekleri:** `pipeline()` ile metin sınıflandırma, token sınıflandırma, soru yanıtlama, metin üretimi, özetleme, çeviri, konuşma tanıma ve görüntü sınıflandırma
-- **Transformer mimarisi:** Dikkat mekanizmasının önemi, transfer öğrenme ve üç ana mimari varyant
-- **Modern LLM gelişmeleri:** Boyut ve yetenekteki büyüme, ölçekleme yasaları, özelleşmiş dikkat mekanizmaları, ön eğitim ve talimat ayarından oluşan iki aşamalı eğitim
-- **Pratik uygulamalar:** Hugging Face Hub'dan model bulmak, Inference API ile tarayıcıda test etmek, göreve uygun modeli seçmek
-
-<a id="cheat-sheet"></a>
-
-#### Transformer Cheat Sheet (Hızlı Başvuru Kartı)
-
-##### Üç mimari (1/6, 1/10)
-
-| | Encoder | Decoder | Encoder-Decoder |
-|---|---|---|---|
-| **Diğer adı** | Otokodlayıcı | Otoregresif | Diziden diziye |
-| **Dikkat** | Cümledeki tüm kelimeler (çift yönlü) | Yalnızca önceki kelimeler | Encoder: tümü · Decoder: öncekiler |
-| **Ön eğitim** | Bozulan (maskelenen) cümleyi yeniden bulma | Bir sonraki kelimeyi tahmin etme | Bozulan cümleyi yeniden oluşturma |
-| **Görevler** | Cümle sınıflandırma, NER, çıkarımsal QA | Metin üretimi, sohbet, yaratıcı yazım | Özetleme, çeviri, üretken QA |
-| **Örnekler** | BERT, DistilBERT, ModernBERT | GPT, LLaMA, Gemma, SmolLM | BART, T5, Marian, mBART |
-
-##### `pipeline()` (1/3)
-
-```mermaid
-flowchart LR
-    A["Metin"] --> B["1. Ön işleme"] --> C["2. Model"] --> D["3. Son işleme"] --> E["Sonuç"]
-```
-
-`sentiment-analysis` · `zero-shot-classification` · `text-generation` · `fill-mask` · `ner` · `question-answering` · `summarization` · `translation`
-
-##### Transfer öğrenme (1/4)
-
-```mermaid
-flowchart LR
-    A["Rastgele ağırlıklar"] -->|"Ön eğitim: çok büyük veri, öz denetimli, haftalar"| B["Ön eğitimli model"]
-    B -->|"İnce ayar: göreve özgü etiketli veri, denetimli, daha ucuz"| C["Göreve uyarlanmış model"]
-```
-
-**Mimari** = iskelet · **Checkpoint** = ağırlıklar · **Dikkat** = kelimenin temsili için cümledeki ilgili kelimelere odaklanma (standart maliyet O(n²))
-
-##### LLM çıkarımı (1/8)
-
-```mermaid
-flowchart LR
-    A["İstem"] --> B["Ön doldurma<br/>hesaplama yoğun"] --> C["Kod çözme: token token<br/>bellek yoğun"] -->|"EOS"| D["Yanıt"]
-```
-
-| Kontrol | Etkisi |
-|---|---|
-| Sıcaklık | > 1,0 rastgele, yaratıcı · < 1,0 odaklı, deterministik |
-| Top-k / Top-p | En olası k kelime / olasılık toplamı eşiğe (ör. %90) ulaşan kelimeler |
-| Varlık / sıklık cezası | Tekrarı azaltır |
-| Işın araması | Birden çok aday diziyi izler; daha tutarlı, daha pahalı |
-
-**Metrikler:** TTFT · TPOT · Verim · VRAM · **KV önbellek** üretimi hızlandırır
-
-##### Sınırlar (1/2, 1/9)
-
-Halüsinasyon · gerçek anlama eksikliği · önyargı (ince ayar gidermez) · sınırlı bağlam penceresi · yüksek hesaplama ihtiyacı
-
-<a id="k1-11"></a>
-
-### 1/11 · Sertifika sınavı
-
-**Hazırlayan:** Sıla Taşan (Sınav Komiseri & Ölçme Değerlendirme) · Dosya: [`bolum_01_quiz_sinav.md`](bolum_01_quiz_sinav.md)
-
-1/11 sertifikasyon sınavına ilişkin çalışma bu dosyadadır.
-
----
-
 <a id="ceviri-arsivi"></a>
 
-## 5. Türkçe Çeviri Arşivi
+## 4. Türkçe Çeviri Arşivi
 
 Hugging Face LLM Course 1. bölümünün resmî Türkçe çevirisidir. Çeviri kaynağa birebir sadıktır; kod blokları, çıktılar, bağlantılar ve görseller orijinaliyle aynıdır. Her başlığa tıklayarak ilgili alt bölümü açabilirsiniz. 1/7 ve 1/11 sınav bölümleri [`bolum_01_quiz_sinav.md`](bolum_01_quiz_sinav.md) dosyasında yer alır.
 
@@ -1804,6 +1595,215 @@ Bu bölümde oluşturduğunuz temel, sonraki kısımlarda daha ileri düzey konu
 
 ---
 
+<a id="unite-icerigi"></a>
+
+## 5. Ünite İçeriği (Kurs Sırasıyla)
+
+Bu bölüm, Hugging Face kursundaki alt bölümlerin sırasını izler. Her alt bölümün başında onu hazırlayan takım üyesinin adı yer alır.
+
+<a id="k1-1"></a>
+
+### 1/1 · Giriş
+
+**Hazırlayan:** Özge Sayınbaş (Dokümantasyon Yöneticisi & Çeviri Sorumlusu) · Teknik Rehber
+
+**NLP (Doğal Dil İşleme)**, bilgisayarların insan dilini anlamasını, yorumlamasını ve üretmesini sağlamaya odaklanan geniş bir alandır; duygu analizi, adlandırılmış varlık tanıma ve makine çevirisi gibi görevleri kapsar. **LLM'ler (Büyük Dil Modelleri)** ise devasa boyutları, kapsamlı eğitim verileri ve göreve özgü çok az eğitimle çok çeşitli dil görevlerini yerine getirebilmeleriyle öne çıkan, NLP modellerinin güçlü bir alt kümesidir. Llama, GPT ve Claude serisi bu modellere örnektir.
+
+<a id="k1-2"></a>
+
+### 1/2 · Doğal Dil İşleme ve Büyük Dil Modelleri
+
+**Hazırlayan:** Özge Sayınbaş (Dokümantasyon Yöneticisi & Çeviri Sorumlusu) · Teknik Rehber
+
+#### Yaygın NLP görevleri
+
+| Görev | Kurstaki örnekler |
+|---|---|
+| Cümlelerin bütün olarak sınıflandırılması | Yorumun duygu durumu, e-postanın spam olup olmadığı, cümlenin dil bilgisi açısından doğruluğu, iki cümlenin mantıksal ilişkisi |
+| Cümledeki her kelimenin sınıflandırılması | Dil bilgisel öğeler (isim, fiil, sıfat) veya adlandırılmış varlıklar (kişi, konum, kurum) |
+| Metin içeriği üretme | İstemi otomatik üretilen metinle tamamlama, maskelenmiş kelimelerle boşluk doldurma |
+| Metinden yanıt çıkarma | Soru ve bağlam verildiğinde yanıtı bağlamdan çıkarma |
+| Girdi metninden yeni cümle üretme | Çeviri, özetleme |
+
+NLP yalnızca yazılı metinle sınırlı değildir; ses kaydının yazıya dökülmesi veya bir görselin betimlenmesi gibi konuşma tanıma ve bilgisayarlı görü problemleriyle de ilgilenir.
+
+#### LLM'lerin özellikleri ve sınırlamaları
+
+| Belirleyici özellikler | Sınırlamalar |
+|---|---|
+| **Ölçek:** Milyonlarca, milyarlarca, hatta yüz milyarlarca parametre | **Halüsinasyon:** Yanlış bilgiyi kendinden emin şekilde üretebilir |
+| **Genel yetenekler:** Göreve özgü eğitim olmadan birden fazla görev | **Gerçek anlama eksikliği:** Tamamen istatistiksel örüntülerle çalışır |
+| **Bağlam içi öğrenme:** İstemdeki örneklerden öğrenme | **Önyargı:** Eğitim verisindeki önyargıyı yeniden üretebilir |
+| **Ortaya çıkan yetenekler:** Model büyüdükçe öngörülmemiş yetenekler | **Bağlam penceresi:** Sınırlıdır (iyileşmekte olsa da) |
+| | **Hesaplama kaynakları:** Ciddi kaynak gerektirir |
+
+LLM'ler, her görev için ayrı model geliştirme yaklaşımını; istemlerle yönlendirilebilen veya ince ayar yapılabilen tek bir büyük model kullanma yaklaşımına dönüştürmüştür. Buna rağmen belirsizlik, kültürel bağlam, iğneleme ve mizahı anlamak hâlâ zorluk olmaya devam etmektedir.
+
+<a id="k1-3"></a>
+
+### 1/3 · Transformer'lar neler yapabilir?
+
+**Hazırlayan:** Himmet Can Umutlu (Repo Kaptanı & Uygulama Kodlama Mühendisi) · Notebook: [`pipeline_ve_inference.ipynb`](pipeline_ve_inference.ipynb)
+
+<!-- HIMMET CAN UMUTLU: Notebook'taki her bölüm için 1-2 cümlelik açıklamayı tabloya ekle. -->
+
+| Notebook bölümü | Açıklama |
+|---|---|
+| Sentiment Analysis | <!-- açıklama --> |
+| Zero-shot Classification | <!-- açıklama --> |
+| Text Generation | <!-- açıklama --> |
+| NER | <!-- açıklama --> |
+
+<a id="mimari-analiz"></a>
+<a id="k1-4"></a>
+
+### 1/4 · Transformer'lar nasıl çalışır?
+
+**Hazırlayan:** Simay Evin (Sistem Mimarı) · Mimari ve Algoritma Analizi
+
+<!-- SIMAY EVIN: Alt başlıkların altına kendi metnini ekle. -->
+
+#### Self-Attention ve Q, K, V matrisleri
+
+<!-- Ders planına göre: Sorgu (Query), Anahtar (Key), Değer (Value) matrislerinin anlamı ve QK^T / sqrt(d_k) formülünün açıklaması -->
+
+#### Transformer neden RNN/LSTM'den üstün? (Paralelleştirme)
+
+<!-- Sıralı işleme vs. paralel işleme, uzun mesafe bağımlılıkları -->
+
+#### Tahta şeması notları
+
+<!-- Tahtada çizilecek blok şemasının adımları -->
+
+<a id="k1-5"></a>
+
+### 1/5 · 🤗 Transformer'lar görevleri nasıl çözer?
+
+**Hazırlayan:** Himmet Can Umutlu (Repo Kaptanı & Uygulama Kodlama Mühendisi) · Notebook: [`pipeline_ve_inference.ipynb`](pipeline_ve_inference.ipynb)
+
+<!-- HIMMET CAN UMUTLU: 1/5 ile ilgili notebook bölümlerini ve açıklamalarını buraya ekle. -->
+
+<a id="k1-6"></a>
+
+### 1/6 · Transformer Mimarileri
+
+**Hazırlayan:** Simay Evin (Sistem Mimarı) · Mimari ve Algoritma Analizi
+
+#### Mimari aileleri karşılaştırma tablosu
+
+<!-- SIMAY EVIN: Encoder-only (BERT), Decoder-only (GPT), Encoder-Decoder (T5) tablosu -->
+
+<a id="k1-7"></a>
+
+### 1/7 · Kısa sınav
+
+**Hazırlayan:** Sıla Taşan (Sınav Komiseri & Ölçme Değerlendirme) · Dosya: [`bolum_01_quiz_sinav.md`](bolum_01_quiz_sinav.md)
+
+1/7 hızlı quiz sorularının Türkçe çevirisi, özgün akademik sorular ve çözüm anahtarı bu dosyadadır.
+
+<a id="k1-8"></a>
+
+### 1/8 · LLM'lerle çıkarım
+
+**Hazırlayan:** Himmet Can Umutlu (Repo Kaptanı & Uygulama Kodlama Mühendisi) · Notebook: [`pipeline_ve_inference.ipynb`](pipeline_ve_inference.ipynb)
+
+| Notebook bölümü | Açıklama |
+|---|---|
+| Temperature, Top-k, Top-p | <!-- açıklama + grafik yorumu --> |
+| Greedy Search vs. Beam Search | <!-- açıklama --> |
+
+<a id="zafiyet-testleri"></a>
+<a id="k1-9"></a>
+
+### 1/9 · Önyargı ve sınırlamalar
+
+**Hazırlayan:** Abdulkadir Öcal (QA / Red-Teamer) · Notebook: [`red_teaming_zafiyet.ipynb`](red_teaming_zafiyet.ipynb)
+
+<!-- ABDULKADİR ÖCAL: Her testin amacını ve bulgusunu aşağıdaki tabloya ekle. -->
+
+| Test | Amaç | Bulgu |
+|---|---|---|
+| Mask filling cinsiyet/meslek önyargısı | <!-- --> | <!-- --> |
+| Halüsinasyon testi | <!-- --> | <!-- --> |
+| Prompt injection testi | <!-- --> | <!-- --> |
+
+<a id="k1-10"></a>
+
+### 1/10 · Ünite Özeti
+
+**Hazırlayan:** Özge Sayınbaş (Dokümantasyon Yöneticisi & Çeviri Sorumlusu) · Teknik Rehber
+
+Bu ünitede şunlar ele alındı:
+
+- **NLP ve LLM'ler:** NLP'nin sınıflandırmadan üretime uzanan görevleri ve LLM'lerin bu alanı nasıl dönüştürdüğü
+- **Transformer yetenekleri:** `pipeline()` ile metin sınıflandırma, token sınıflandırma, soru yanıtlama, metin üretimi, özetleme, çeviri, konuşma tanıma ve görüntü sınıflandırma
+- **Transformer mimarisi:** Dikkat mekanizmasının önemi, transfer öğrenme ve üç ana mimari varyant
+- **Modern LLM gelişmeleri:** Boyut ve yetenekteki büyüme, ölçekleme yasaları, özelleşmiş dikkat mekanizmaları, ön eğitim ve talimat ayarından oluşan iki aşamalı eğitim
+- **Pratik uygulamalar:** Hugging Face Hub'dan model bulmak, Inference API ile tarayıcıda test etmek, göreve uygun modeli seçmek
+
+<a id="cheat-sheet"></a>
+
+#### Transformer Cheat Sheet (Hızlı Başvuru Kartı)
+
+##### Üç mimari (1/6, 1/10)
+
+| | Encoder | Decoder | Encoder-Decoder |
+|---|---|---|---|
+| **Diğer adı** | Otokodlayıcı | Otoregresif | Diziden diziye |
+| **Dikkat** | Cümledeki tüm kelimeler (çift yönlü) | Yalnızca önceki kelimeler | Encoder: tümü · Decoder: öncekiler |
+| **Ön eğitim** | Bozulan (maskelenen) cümleyi yeniden bulma | Bir sonraki kelimeyi tahmin etme | Bozulan cümleyi yeniden oluşturma |
+| **Görevler** | Cümle sınıflandırma, NER, çıkarımsal QA | Metin üretimi, sohbet, yaratıcı yazım | Özetleme, çeviri, üretken QA |
+| **Örnekler** | BERT, DistilBERT, ModernBERT | GPT, LLaMA, Gemma, SmolLM | BART, T5, Marian, mBART |
+
+##### `pipeline()` (1/3)
+
+```mermaid
+flowchart LR
+    A["Metin"] --> B["1. Ön işleme"] --> C["2. Model"] --> D["3. Son işleme"] --> E["Sonuç"]
+```
+
+`sentiment-analysis` · `zero-shot-classification` · `text-generation` · `fill-mask` · `ner` · `question-answering` · `summarization` · `translation`
+
+##### Transfer öğrenme (1/4)
+
+```mermaid
+flowchart LR
+    A["Rastgele ağırlıklar"] -->|"Ön eğitim: çok büyük veri, öz denetimli, haftalar"| B["Ön eğitimli model"]
+    B -->|"İnce ayar: göreve özgü etiketli veri, denetimli, daha ucuz"| C["Göreve uyarlanmış model"]
+```
+
+**Mimari** = iskelet · **Checkpoint** = ağırlıklar · **Dikkat** = kelimenin temsili için cümledeki ilgili kelimelere odaklanma (standart maliyet O(n²))
+
+##### LLM çıkarımı (1/8)
+
+```mermaid
+flowchart LR
+    A["İstem"] --> B["Ön doldurma<br/>hesaplama yoğun"] --> C["Kod çözme: token token<br/>bellek yoğun"] -->|"EOS"| D["Yanıt"]
+```
+
+| Kontrol | Etkisi |
+|---|---|
+| Sıcaklık | > 1,0 rastgele, yaratıcı · < 1,0 odaklı, deterministik |
+| Top-k / Top-p | En olası k kelime / olasılık toplamı eşiğe (ör. %90) ulaşan kelimeler |
+| Varlık / sıklık cezası | Tekrarı azaltır |
+| Işın araması | Birden çok aday diziyi izler; daha tutarlı, daha pahalı |
+
+**Metrikler:** TTFT · TPOT · Verim · VRAM · **KV önbellek** üretimi hızlandırır
+
+##### Sınırlar (1/2, 1/9)
+
+Halüsinasyon · gerçek anlama eksikliği · önyargı (ince ayar gidermez) · sınırlı bağlam penceresi · yüksek hesaplama ihtiyacı
+
+<a id="k1-11"></a>
+
+### 1/11 · Sertifika sınavı
+
+**Hazırlayan:** Sıla Taşan (Sınav Komiseri & Ölçme Değerlendirme) · Dosya: [`bolum_01_quiz_sinav.md`](bolum_01_quiz_sinav.md)
+
+1/11 sertifikasyon sınavına ilişkin çalışma bu dosyadadır.
+
+---
+
 <a id="terim-sozlugu"></a>
 
 ## 6. Terim Sözlüğü
@@ -1875,6 +1875,5 @@ Bu bölümde oluşturduğunuz temel, sonraki kısımlarda daha ileri düzey konu
 ## 7. Kaynak
 
 - Hugging Face LLM Course, Bölüm 1: https://huggingface.co/learn/llm-course/chapter1/1
-
 
 Çeviri içerikleri, orijinal kurs gibi [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) kapsamındadır. Orijinal metin © Hugging Face. Türkçe çeviri ve uyarlama NLP_2026 Bölüm 1 takımı tarafından hazırlanmıştır.
