@@ -22,7 +22,7 @@ Bu klasör, [Hugging Face LLM Course](https://huggingface.co/learn/llm-course/ch
    - [1/6 · Transformer Mimarileri](#k1-6) — Simay Evin
    - [1/7 · Kısa sınav](#k1-7) — Sıla Taşan
    - [1/8 · LLM'lerle çıkarım](#k1-8) — Himmet Can Umutlu
-   - [1/9 · Önyargı ve sınırlamalar](#k1-9) — Kadir
+   - [1/9 · Önyargı ve sınırlamalar](#k1-9) — Abdulkadir Öcal
    - [1/10 · Ünite Özeti ve Transformer Cheat Sheet](#k1-10) — Özge Sayınbaş
    - [1/11 · Sertifika sınavı](#k1-11) — Sıla Taşan
 5. [Türkçe Çeviri Arşivi](#ceviri-arsivi)
@@ -37,7 +37,7 @@ Bu klasör, [Hugging Face LLM Course](https://huggingface.co/learn/llm-course/ch
 
 | Üye | Rol | Zimmetli Konular | Çıktı |
 |---|---|---|---|
-| Kadir | QA / Red-Teamer (Öğrenci 3) | 1/9 Önyargı ve Sınırlamalar | [`red_teaming_zafiyet.ipynb`](red_teaming_zafiyet.ipynb) |
+| Abdulkadir Öcal | QA / Red-Teamer (Öğrenci 3) | 1/9 Önyargı ve Sınırlamalar | [`red_teaming_zafiyet.ipynb`](red_teaming_zafiyet.ipynb) |
 | Özge Sayınbaş | Dokümantasyon Yöneticisi & Çeviri Sorumlusu (Öğrenci 1) | 1/1 Giriş, 1/2 NLP ve LLM'ler, 1/10 Ünite Özeti | `README.md` (çeviri arşivi, teknik rehber, cheat sheet), nihai PR |
 | Simay Evin | Sistem Mimarı: Teori & Algoritma (Öğrenci 2) | 1/4 Transformer'lar Nasıl Çalışır?, 1/6 Transformer Mimarileri | `README.md` → Mimari ve Algoritma Analizi ([1/4](#k1-4), [1/6](#k1-6)) |
 | Himmet Can Umutlu | Repo Kaptanı & Uygulama Kodlama Mühendisi | 1/3 Transformer'lar Neler Yapabilir?, 1/5 Görev Çözümleri, 1/8 LLM ile Çıkarım | [`pipeline_ve_inference.ipynb`](pipeline_ve_inference.ipynb), PR koordinasyonu |
