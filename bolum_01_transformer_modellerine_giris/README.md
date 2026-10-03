@@ -28,11 +28,11 @@ Bu klasör, [Hugging Face LLM Course](https://huggingface.co/learn/llm-course/ch
 
 | Üye | Rol | Zimmetli Konular | Çıktı |
 |---|---|---|---|
-| Özge Sayınbaş | Dokümantasyon Yöneticisi & Çeviri Sorumlusu (Öğrenci 1) | 1/1 Giriş, 1/2 NLP ve LLM'ler, 1/10 Ünite Özeti | [`turkce_ceviri.md`](turkce_ceviri.md), [`cheat_sheet.md`](cheat_sheet.md), `README.md` (birleştirme), PR |
+| Özge Sayınbaş | Dokümantasyon Yöneticisi & Çeviri Sorumlusu| 1/1 Giriş, 1/2 NLP ve LLM'ler, 1/10 Ünite Özeti | [`turkce_ceviri.md`](turkce_ceviri.md), [`cheat_sheet.md`](cheat_sheet.md), `README.md` (birleştirme), PR |
 | Himmet Can Umutlu | Repo Kaptanı & Uygulama Kodlama Mühendisi | 1/3 Transformer'lar Neler Yapabilir?, 1/5 Görev Çözümleri, 1/8 LLM ile Çıkarım | [`pipeline_ve_inference.ipynb`](pipeline_ve_inference.ipynb) |
-| Simay Evin | Sistem Mimarı: Teori & Algoritma (Öğrenci 2) | 1/4 Transformer'lar Nasıl Çalışır?, 1/6 Transformer Mimarileri | `README.md` → Mimari ve Algoritma Analizi ([1/4](#k1-4), [1/6](#k1-6)) |
-| Sıla Taşan | Sınav Komiseri & Ölçme Değerlendirme (Öğrenci 4) | 1/7 Hızlı Quiz, 1/11 Sertifikasyon Sınavı | `bolum_01_quiz_sinav.md` |
-| Abdulkadir Öcal | QA / Red-Teamer (Öğrenci 3) | 1/9 Önyargı ve Sınırlamalar | [`red_teaming_zafiyet.ipynb`](red_teaming_zafiyet.ipynb) |
+| Simay Evin | Sistem Mimarı: Teori & Algoritma | 1/4 Transformer'lar Nasıl Çalışır?, 1/6 Transformer Mimarileri | `README.md` → Mimari ve Algoritma Analizi ([1/4](#k1-4), [1/6](#k1-6)) |
+| Sıla Taşan | Sınav Komiseri & Ölçme Değerlendirme| 1/7 Hızlı Quiz, 1/11 Sertifikasyon Sınavı | `bolum_01_quiz_sinav.md` |
+| Abdulkadir Öcal | QA / Red-Teamer | 1/9 Önyargı ve Sınırlamalar | [`red_teaming_zafiyet.ipynb`](red_teaming_zafiyet.ipynb) |
 
 <a id="klasor-yapisi"></a>
 
