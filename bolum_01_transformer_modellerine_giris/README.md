@@ -364,308 +364,460 @@ Transformer modelleri üç ana türe ayrılır:
 
 <a id="k1-4"></a>
 
-#### 1/4 · Transformer'lar nasıl çalışır?
+# Transformer Sunum Anlatım Metni
 
-##### 1. Transformer Mimarisi ve Blok Şeması
+## 1. BÖLÜM — Transformers Nasıl Çalışır?
 
-Transformer, özellikle doğal dil işleme (NLP) problemlerinde kullanılan ve diziler arasındaki ilişkileri **attention (dikkat)** mekanizması ile öğrenen bir sinir ağı mimarisidir. Geleneksel RNN ve LSTM yapılarından farklı olarak, bir dizideki elemanları yalnızca sırayla işlemek yerine tokenlar arasındaki ilişkileri aynı yapı içinde değerlendirebilir.
+### 1.1. Önce temel soru: Transformer nedir?
 
-Bir Transformer yapısı temel olarak iki ana bloktan oluşur:
+**Transformer**, metin gibi sıralı verilerdeki parçalar arasındaki ilişkileri **attention (dikkat)** mekanizmasıyla öğrenen bir sinir ağı mimarisidir. 2017’de özellikle makine çevirisi için tanıtıldı; daha sonra BERT, GPT ve T5 gibi birçok model ailesinin temelini oluşturdu.
 
-- **Encoder:** Girdiyi işler ve bağlamsal bir temsil oluşturur.
-- **Decoder:** Encoder'dan gelen temsili ve daha önce üretilen çıktıları kullanarak yeni çıktı tokenlarını üretir.
-
-Transformer modellerinde bu iki yapı birlikte kullanılabildiği gibi yalnızca encoder veya yalnızca decoder da kullanılabilir.
-
-Aşağıdaki şema Transformer mimarisinin temel akışını göstermektedir:
-
-```text
-                    GİRDİ
-          "Ben bugün okula gidiyorum"
-                      │
-                      ▼
-          Token + Positional Encoding
-                      │
-                      ▼
-        ┌──────────────────────────┐
-        │         ENCODER          │
-        │                          │
-        │  Multi-Head             │
-        │  Self-Attention         │
-        │          │               │
-        │          ▼               │
-        │      Add & Norm          │
-        │          │               │
-        │          ▼               │
-        │     Feed Forward         │
-        │          │               │
-        │          ▼               │
-        │      Add & Norm          │
-        └────────────┬─────────────┘
-                     │
-                     ▼
-          Bağlamsal Temsil / Context
-                     │
-                     ▼
-        ┌──────────────────────────┐
-        │         DECODER          │
-        │                          │
-        │  Masked Multi-Head      │
-        │  Self-Attention         │
-        │          │               │
-        │          ▼               │
-        │      Add & Norm          │
-        │          │               │
-        │          ▼               │
-        │  Encoder-Decoder         │
-        │  Attention               │
-        │          │               │
-        │          ▼               │
-        │      Add & Norm          │
-        │          │               │
-        │          ▼               │
-        │     Feed Forward         │
-        │          │               │
-        │          ▼               │
-        │      Add & Norm          │
-        └────────────┬─────────────┘
-                     │
-                     ▼
-                   ÇIKTI
-```
-
-Şemanın sezgisel akışı şu şekildedir:
-
-1. Girdi metni önce **tokenlara** ayrılır.
-2. Tokenlara sıralarını göstermek için **positional encoding (konum bilgisi)** eklenir.
-3. **Encoder**, tokenlar arasındaki ilişkileri Self-Attention ile değerlendirerek bağlamsal bir temsil oluşturur.
-4. **Decoder**, encoder'dan gelen bu temsil ile daha önce üretilen tokenları kullanarak çıktı üretir.
-5. Decoder gelecekteki tokenları görmemek için **Masked Self-Attention** kullanır.
-
-> Encoder ve decoder blokları gerçek Transformer yapısında birden fazla kez tekrar edilebilir.
+| Terim | Anlamı |
+|---|---|
+| **Mimari (Architecture)** | Modelin iskeleti ve katmanlarının nasıl düzenlendiğidir. |
+| **Model** | Belirli bir mimariye göre kurulup eğitilmiş sistemdir. |
+| **Örnek** | Transformer bir mimari ailesidir; BERT, GPT ve T5 bu fikri farklı biçimlerde kullanan model aileleridir. |
 
 ---
 
-##### 2. Self-Attention Mekanizması
+### 1.2. Neden Transformer’a ihtiyaç duyuldu?
 
-Transformer mimarisinin temel bileşenlerinden biri **Self-Attention** mekanizmasıdır. Self-Attention, bir token işlenirken aynı dizideki diğer tokenların o token için ne kadar önemli olduğunu hesaplar.
+Transformer’dan önce **RNN** ve **LSTM** gibi yapılar metni büyük ölçüde adım adım işlerdi. Bir zaman adımı önceki adımdan gelen bilgiye bağlı olduğu için uzun dizilerde eğitim sırasında **paralelleştirme** sınırlanır.
 
-Örneğin:
+Transformer ise tokenlar arasındaki ilişkileri **Self-Attention** ile büyük matris işlemleri halinde hesaplayabilir. Bu nedenle özellikle eğitim aşamasında GPU gibi paralel işlem donanımlarından daha iyi yararlanır.
 
-> "Kedi sütü içti."
+| RNN / LSTM | Transformer |
+|---|---|
+| `Token 1 → Token 2 → Token 3 → Token 4` | Tokenlar arasındaki ilişkiler attention hesapları içinde birlikte değerlendirilebilir. |
+| İşlem sıralı bağımlılığa sahiptir. | Eğitimde hesaplamalar daha iyi paralelleştirilebilir. |
 
-Model **"içti"** tokenını işlerken "kedi" ve "sütü" tokenlarının bu kelimeyle ne kadar ilişkili olduğunu dikkate alabilir. Böylece kelime yalnızca kendi başına değil, cümledeki bağlamıyla birlikte temsil edilir.
-
-Self-Attention işleminde her token için üç farklı temsil oluşturulur:
-
-- **Q — Query (Sorgu):** Tokenın hangi bilgiyi aradığını temsil eder.
-- **K — Key (Anahtar):** Tokenın hangi bilgiyle eşleşebileceğini temsil eder.
-- **V — Value (Değer):** Tokenın taşıdığı asıl bilgiyi temsil eder.
-
-Sezgisel olarak:
-
-```text
-Q → "Ne arıyorum?"
-K → "Bende hangi ipucu var?"
-V → "Taşıdığım bilgi nedir?"
-```
-
-Self-Attention işlemi şu formülle ifade edilir:
-
-$$
-Attention(Q,K,V)=softmax\left(\frac{QK^T}{\sqrt{d_k}}\right)V
-$$
-
-Formülün adım adım anlamı:
-
-1. **Q ile K karşılaştırılır.**  
-   \(QK^T\) işlemi ile tokenlar arasındaki ilişki skorları hesaplanır.
-
-2. **Skorlar ölçeklenir.**  
-   Elde edilen değerler \(\sqrt{d_k}\)'ya bölünerek skorların aşırı büyümesi önlenir.
-
-3. **Softmax uygulanır.**  
-   Skorlar dikkat ağırlıklarına dönüştürülür. Böylece hangi tokena ne kadar dikkat edileceği belirlenir.
-
-4. **V değerleri ağırlıklandırılır.**  
-   Hesaplanan dikkat ağırlıkları Value değerleri ile birleştirilir ve token için yeni, bağlama duyarlı bir temsil oluşturulur.
-
-Kısaca:
-
-```text
-Q × Kᵀ
-   ↓
-İlişki skorları
-   ↓
-÷ √dk
-   ↓
-Ölçekleme
-   ↓
-Softmax
-   ↓
-Dikkat ağırlıkları
-   ↓
-× V
-   ↓
-Bağlamsal temsil
-```
+> **Kısa fikir:** RNN/LSTM daha çok **adım adım**, Transformer ise eğitim sırasında token ilişkilerini **birlikte hesaplamaya daha uygun** çalışır.
 
 ---
 
-##### 3. Transformer ile RNN/LSTM Karşılaştırması
+### 1.3. Transformer modelleri dili nasıl öğrenir?
 
-RNN ve LSTM tabanlı yapılarda dizideki elemanlar genellikle **ardışık (sequential)** olarak işlenir. Bir zaman adımındaki hesaplama, önceki zaman adımından gelen bilgiye bağlıdır.
+Transformer modelleri genellikle büyük miktarda ham metin üzerinde bir **language model** olarak **pretraining** görür.
 
-Basitleştirilmiş RNN/LSTM akışı:
+Bu eğitim çoğu zaman **self-supervised learning** şeklindedir. Yani modele insanlar tarafından tek tek hazırlanmış etiketler vermek yerine, öğrenilecek hedef verinin kendi içinden oluşturulur.
 
-```text
-Token 1 → Token 2 → Token 3 → Token 4
-```
+#### Causal Language Modeling
 
-Bu yapı nedeniyle bir adım tamamlanmadan sonraki adımın hesaplanması zorlaşır ve eğitim sırasında paralelleştirme sınırlı kalır.
+Model önceki tokenlara bakarak sıradaki tokenı tahmin eder.
 
-Transformer mimarisinde ise Self-Attention işlemleri büyük ölçüde **matris işlemleri** üzerinden gerçekleştirildiği için bir dizideki tokenlar arasındaki ilişkiler aynı anda hesaplanabilir.
-
-Basitleştirilmiş Transformer yaklaşımı:
+**Örnek:**
 
 ```text
-Token 1 ─┐
-Token 2 ─┤
-Token 3 ─┼→ Self-Attention
-Token 4 ─┘
+Girdi:  "Bugün hava çok ..."
+Tahmin: "güzel"
 ```
 
-Bu nedenle Transformer:
+#### Masked Language Modeling
 
-- GPU gibi paralel işlem gücü yüksek donanımlardan daha iyi yararlanabilir.
-- Eğitim sırasında daha fazla işlemi paralel gerçekleştirebilir.
-- Büyük veri kümeleri ve büyük modeller üzerinde daha verimli ölçeklenebilir.
+Cümlede bazı tokenlar gizlenir ve model eksik tokenı çevresindeki bağlamdan tahmin eder.
 
-> **Önemli not:** Decoder-only modeller, çıktı üretimi sırasında tokenları yine sırayla üretir. Transformer'ın RNN/LSTM'ye göre paralelleştirme avantajı özellikle eğitim aşamasında belirgindir.
-
-<a id="k1-6"></a>
-
-#### 1/6 · Transformer Mimarileri
-
-##### 4. Transformer Mimari Aileleri
-
-Transformer tabanlı modeller üç temel mimari aile altında incelenebilir:
-
-| Mimari | Yapı | Bağlam Kullanımı | Temel Kullanım | Örnek |
-|---|---|---|---|---|
-| **Encoder-only** | Yalnızca Encoder | Girdinin iki tarafındaki bağlamı kullanabilir | Metni anlama, sınıflandırma | BERT |
-| **Decoder-only** | Yalnızca Decoder | Önceki tokenlara bakarak sonraki tokenı üretir | Metin üretimi | GPT |
-| **Encoder-Decoder** | Encoder + Decoder | Girdiyi işler ve yeni bir çıktı dizisi üretir | Çeviri, özetleme | T5 |
-
-###### 4.1. Encoder-only — BERT
-
-Encoder-only modeller girdinin tamamını bağlam içinde değerlendirmeye odaklanır. Bu nedenle metni **anlamaya** yönelik görevlerde kullanışlıdır.
-
-Örnek görevler:
-
-- Metin sınıflandırma
-- Duygu analizi
-- Varlık tanıma (Named Entity Recognition)
-
-Basit şekilde:
+**Örnek:**
 
 ```text
-Metin
-  ↓
-Encoder
-  ↓
-Bağlamsal temsil
-  ↓
-Sınıflandırma / Anlama
+Girdi:  "Kedi [MASK] içti."
+Tahmin: "süt"
 ```
 
-**BERT**, encoder-only mimarinin bilinen örneklerinden biridir.
+Pretraining sonrasında model belirli bir işe uyarlanmak için **fine-tuning / transfer learning** sürecinden geçirilebilir. Böylece dili sıfırdan öğrenmek yerine önceden öğrenilmiş bilgiler yeni görevde kullanılabilir.
+
+Büyük Transformer modellerinin eğitimi pahalı olduğu için **pretrained ağırlıkların paylaşılması** önemlidir. Böylece her proje için aynı dil bilgisini sıfırdan öğrenmek gerekmez.
 
 ---
 
-###### 4.2. Decoder-only — GPT
+### 1.4. Genel Transformer Yapısı: Encoder ve Decoder
 
-Decoder-only modeller temel olarak **bir sonraki tokenı tahmin ederek metin üretmeye** odaklanır.
+Şimdi Transformer’ın genel mimarisine bakalım.
 
-Örneğin modelin girdisi:
+Orijinal Transformer iki ana bloktan oluşur:
 
-> "Bugün hava çok"
+| Parça | Görevi |
+|---|---|
+| **Encoder** | Girdiyi okur ve bağlamsal bir temsil oluşturur. |
+| **Decoder** | Encoder’dan gelen temsili ve daha önce üretilen çıktıları kullanarak hedef diziyi üretir. |
 
-ise model bir sonraki token olarak:
+#### Örnek: İngilizceden Türkçeye çeviri
 
-> "güzel"
-
-gibi bir kelime üretebilir.
-
-Decoder, bir tokenı üretirken henüz oluşmamış gelecekteki tokenlara bakmaz; yalnızca daha önceki tokenları kullanır.
-
-Basit şekilde:
-
-```text
-"Bugün"
-   ↓
-"Bugün hava"
-   ↓
-"Bugün hava çok"
-   ↓
-"Bugün hava çok güzel"
-```
-
-**GPT**, decoder-only mimarinin bilinen örneklerinden biridir.
+| Aşama | Örnek |
+|---|---|
+| **Girdi** | `I love cats.` |
+| **Encoder** | Girdinin bağlamını temsil eder. |
+| **Decoder** | Bu temsilden yararlanarak çıktıyı token token üretir. |
+| **Çıktı** | `Kedileri seviyorum.` |
 
 ---
 
-###### 4.3. Encoder-Decoder — T5
+### 1.5. Transformer Blok Şeması
 
-Encoder-Decoder modeller iki aşamalı çalışır:
-
-1. **Encoder** girdiyi işler ve anlamlı bir temsil oluşturur.
-2. **Decoder** bu temsilden yararlanarak yeni bir çıktı dizisi üretir.
-
-Örnek:
+Aşağıdaki şema, Transformer’ın girdiyi nasıl işleyip çıktıya dönüştürdüğünü basitleştirilmiş şekilde gösterir.
 
 ```text
+GİRDİ
 "I love cats."
-      ↓
-   Encoder
-      ↓
-Bağlamsal temsil
-      ↓
-   Decoder
-      ↓
+      │
+      ▼
+┌───────────────────────────┐
+│ Token Embedding           │
+│ + Positional Encoding     │
+└─────────────┬─────────────┘
+              │
+              ▼
+┌───────────────────────────┐
+│          ENCODER          │
+│                           │
+│  Multi-Head               │
+│  Self-Attention           │
+│          │                │
+│          ▼                │
+│      Add & Norm           │
+│          │                │
+│          ▼                │
+│     Feed Forward          │
+│          │                │
+│          ▼                │
+│      Add & Norm           │
+└─────────────┬─────────────┘
+              │
+              ▼
+      Bağlamsal Temsil
+        (Context)
+              │
+              ▼
+┌───────────────────────────┐
+│          DECODER          │
+│                           │
+│  Masked Multi-Head        │
+│  Self-Attention           │
+│          │                │
+│          ▼                │
+│      Add & Norm           │
+│          │                │
+│          ▼                │
+│  Encoder-Decoder          │
+│  Attention                │
+│          │                │
+│          ▼                │
+│      Add & Norm           │
+│          │                │
+│          ▼                │
+│     Feed Forward          │
+│          │                │
+│          ▼                │
+│      Add & Norm           │
+└─────────────┬─────────────┘
+              │
+              ▼
+ÇIKTI
 "Kedileri seviyorum."
 ```
 
-Bu yapı özellikle bir dizinin başka bir diziye dönüştürüldüğü görevlerde kullanılır.
+#### Şemadaki kutular ne anlama geliyor?
 
-Örnek görevler:
+| Blok | Basit açıklama |
+|---|---|
+| **Token Embedding** | Tokenı bilgisayarın işleyebileceği sayısal bir temsile dönüştürür. |
+| **Positional Encoding** | Tokenın cümlede hangi sırada olduğunu modele bildirir. |
+| **Multi-Head Self-Attention** | Tokenların birbirleriyle ilişkilerini birden fazla attention başlığı üzerinden değerlendirir. |
+| **Feed Forward** | Her tokenın temsilini ayrı bir küçük sinir ağıyla işler. |
+| **Add & Norm** | Bilginin korunmasına ve eğitimin daha kararlı ilerlemesine yardımcı olur. |
+| **Masked Self-Attention** | Decoder’ın henüz üretilmemiş gelecekteki tokenları görmesini engeller. |
+| **Encoder-Decoder Attention** | Decoder’ın, encoder tarafından oluşturulan bağlamsal temsilden yararlanmasını sağlar. |
+
+---
+
+### 1.6. Attention ve Self-Attention Nedir?
+
+**Attention**, modelin bir tokenı temsil ederken hangi diğer tokenlara daha fazla dikkat etmesi gerektiğini hesaplamasıdır.
+
+Bir kelimenin anlamı bulunduğu bağlama göre değişebildiği için bu ilişki önemlidir.
+
+#### Örnek
+
+| Cümle | Bağlam |
+|---|---|
+| **“Ali bankaya para yatırdı.”** | Buradaki *banka*, finans kurumudur. |
+| **“Ali bankta oturdu.”** | Benzer yazılışlı sözcük farklı bir bağlamda farklı anlam taşır. |
+
+Model, çevredeki tokenlarla kurduğu ilişkiler sayesinde kelimenin bağlama uygun temsilini oluşturmaya çalışır.
+
+**Self-Attention** denmesinin nedeni ise bir dizideki tokenların yine **aynı dizideki diğer tokenlarla** ilişkilerinin hesaplanmasıdır.
+
+---
+
+### 1.7. Q, K, V ve Self-Attention Formülü
+
+Her tokenın sayısal temsilinden üç farklı temsil üretilir:
+
+| Gösterim | Açılımı | Sezgisel anlamı |
+|---|---|---|
+| **Q** | Query — Sorgu | “Ben hangi bilgiyi arıyorum?” |
+| **K** | Key — Anahtar | “Ben hangi bilgiyle eşleşebilirim?” |
+| **V** | Value — Değer | “Ben hangi bilgiyi taşıyorum?” |
+
+> Q, K ve V üç farklı kelime değildir. Aynı tokenın üç farklı amaç için oluşturulan matematiksel temsilleridir.
+
+Self-Attention formülü:
+
+```text
+Attention(Q, K, V) = softmax(QKᵀ / √dₖ) V
+```
+
+#### Formülü adım adım okuyalım
+
+| Adım | İşlem | Ne oluyor? |
+|---|---|---|
+| **1** | `QKᵀ` | Query ile Key karşılaştırılır ve tokenlar arasındaki ilişki skorları bulunur. |
+| **2** | `÷ √dₖ` | Skorlar ölçeklenir; değerlerin aşırı büyümesi önlenir. |
+| **3** | `softmax` | Skorlar dikkat ağırlıklarına dönüştürülür. |
+| **4** | `× V` | Dikkat ağırlıkları Value değerleriyle birleştirilir ve bağlama duyarlı yeni temsil oluşur. |
+
+```text
+Q × Kᵀ
+   │
+   ▼
+İlişki skorları
+   │
+   ▼
+÷ √dₖ
+   │
+   ▼
+Ölçekleme
+   │
+   ▼
+softmax
+   │
+   ▼
+Dikkat ağırlıkları
+   │
+   ▼
+× V
+   │
+   ▼
+Yeni bağlamsal temsil
+```
+
+> **Tek cümlelik sezgisel açıklama:**  
+> Self-Attention, **“Bu tokenı anlamak için cümledeki hangi tokenlara ne kadar bakmalıyım?”** sorusunun matematiksel cevabını üretir.
+
+---
+
+### 1.8. Decoder Neden “Geleceği” Göremez?
+
+Orijinal Transformer’da **encoder**, giriş cümlesinin tamamına bakabilir.
+
+**Decoder** ise çıktı üretirken henüz üretmediği gelecekteki tokenları göremez. Bu nedenle **Masked Self-Attention** kullanılır.
+
+#### Örnek
+
+```text
+"Bugün hava çok ..."
+```
+
+Decoder sıradaki tokenı üretirken doğru cevabın ilerideki kısmını önceden göremez. Yalnızca:
+
+- daha önceki tokenları,
+- encoder’dan gelen bağlamsal temsili
+
+kullanarak sıradaki tokenı tahmin eder.
+
+---
+
+### 1.9. Architecture, Checkpoint ve Model
+
+| Terim | Anlamı |
+|---|---|
+| **Architecture** | Katmanların ve işlemlerin tanımı; modelin iskeleti. |
+| **Checkpoint** | Belirli bir mimariye ait eğitilmiş ağırlıklar. |
+| **Model** | Günlük kullanımda mimariyi ve eğitilmiş sistemi kapsayabilen daha genel terim. |
+
+**Örnek:** BERT bir mimari ailesidir; `bert-base-cased` ise belirli eğitilmiş ağırlıkları olan bir checkpoint olarak düşünülebilir.
+
+---
+
+# 2. BÖLÜM — Transformer Mimarileri
+
+### 2.1. Neden Birden Fazla Transformer Mimarisi Var?
+
+Farklı NLP problemleri farklı özelliklere ihtiyaç duyar. Bu nedenle Transformer’ın **encoder** ve **decoder** parçaları üç temel biçimde kullanılır:
+
+| Mimari | Ne kullanır? | En uygun olduğu iş | Örnek |
+|---|---|---|---|
+| **Encoder-only** | Sadece Encoder | Metni anlama / sınıflandırma | **BERT** |
+| **Decoder-only** | Sadece Decoder | Metin üretme | **GPT** |
+| **Encoder-Decoder** | İkisi birlikte | Bir diziyi başka bir diziye dönüştürme | **T5 / BART** |
+
+---
+
+### 2.2. Encoder-only Modeller — BERT Tipi
+
+Encoder-only model yalnızca Transformer’ın **encoder** tarafını kullanır.
+
+Attention katmanı girişteki tüm tokenlara erişebilir. Yani bir tokenın hem solundaki hem sağındaki bağlam kullanılabilir. Buna **bidirectional (çift yönlü) bağlam** denir.
+
+#### Örnek görev
+
+| Aşama | Örnek |
+|---|---|
+| **Girdi** | `Bu film hiç güzel değildi.` |
+| **Amaç** | Yorum olumlu mu, olumsuz mu? |
+| **Gereken şey** | Yeni paragraf üretmek değil, bütün cümleyi doğru anlamak. |
+| **Uygun mimari** | **Encoder-only** |
+
+BERT tipi modellerin pretraining’i çoğunlukla **Masked Language Modeling** mantığına dayanır: bazı tokenlar gizlenir ve model bağlamdan onları tahmin etmeye çalışır.
+
+**Uygun görevler:**
+
+- Metin sınıflandırma
+- Named Entity Recognition (**NER**)
+- Token sınıflandırma
+- Extractive Question Answering
+
+**Örnek modeller:** BERT, DistilBERT, ModernBERT
+
+---
+
+### 2.3. Decoder-only Modeller — GPT Tipi
+
+Decoder-only model yalnızca Transformer’ın **decoder** tarafını kullanır.
+
+Bir tokenı üretirken yalnızca daha önceki tokenlara erişir. Bu nedenle **auto-regressive / causal** yapı olarak anılır.
+
+#### Örnek
+
+| Aşama | Örnek |
+|---|---|
+| **Girdi / Prompt** | `Bir robot okula ilk kez gitti ve...` |
+| **Modelin yaptığı** | Bir sonraki tokenı tahmin eder. |
+| **Devamı** | Ürettiği tokenı bağlama ekler ve sonraki tokenı tahmin eder. |
+| **Çıktı** | Yeni bir metin dizisi |
+
+Basitleştirilmiş üretim:
+
+```text
+"Bir robot"
+      ↓
+"Bir robot okula"
+      ↓
+"Bir robot okula ilk"
+      ↓
+"Bir robot okula ilk kez"
+      ↓
+...
+```
+
+Modern büyük dil modellerinin çoğu decoder-only mimariyi kullanır.
+
+Tipik süreç:
+
+```text
+Büyük metin verisi
+      ↓
+Next-token prediction ile pretraining
+      ↓
+Instruction tuning / fine-tuning
+      ↓
+Talimatları daha iyi takip eden model
+```
+
+**Uygun görevler:**
+
+- Metin üretimi
+- Sohbet
+- Kod üretimi
+- Yaratıcı yazma
+- Generative Question Answering
+
+**Örnek aileler:** GPT, Llama, Gemma ve benzeri decoder-only LLM’ler
+
+---
+
+### 2.4. Encoder-Decoder Modeller — T5 Tipi
+
+Encoder-decoder veya **sequence-to-sequence** modeller iki tarafı birlikte kullanır.
+
+- **Encoder** girişin tamamını anlamlandırır.
+- **Decoder** encoder’ın bağlamsal temsilini kullanarak yeni bir çıktı dizisi üretir.
+
+#### Örnek: Çeviri
+
+| Aşama | Örnek |
+|---|---|
+| **Girdi** | `I love cats.` |
+| **Encoder** | İngilizce girdinin bağlamını çıkarır. |
+| **Decoder** | Bu bilgiyi kullanarak Türkçe çıktıyı sırayla üretir. |
+| **Çıktı** | `Kedileri seviyorum.` |
+
+T5 gibi modellerde pretraining sırasında girişin bazı bölümleri bozulup veya gizlenip modelden eksik kısmı yeniden oluşturması istenebilir. Böylece model hem girdiyi anlamayı hem de çıktı üretmeyi öğrenir.
+
+**Uygun görevler:**
 
 - Makine çevirisi
-- Metin özetleme
-- Metinden metne dönüşüm
+- Özetleme
+- Grammar correction
+- Data-to-text
+- Generative Question Answering
 
-**T5**, encoder-decoder mimarisinin bilinen örneklerinden biridir.
-
----
-
-##### 5. Genel Özet
-
-Transformer mimarisinin temel gücü, tokenlar arasındaki ilişkileri **Self-Attention** mekanizması ile doğrudan hesaplayabilmesidir. Self-Attention içinde kullanılan **Query, Key ve Value** yapıları sayesinde model hangi tokenların birbirleriyle daha ilişkili olduğunu belirler ve bağlama duyarlı temsiller üretir.
-
-RNN ve LSTM yapılarının ardışık işlem bağımlılığına karşılık Transformer, attention hesaplamalarını matris işlemleriyle gerçekleştirdiği için eğitim sırasında paralelleştirmeye daha uygundur.
-
-Transformer tabanlı modellerin temel mimari aileleri ise:
-
-- **BERT → Encoder-only → Anlama**
-- **GPT → Decoder-only → Üretme**
-- **T5 → Encoder-Decoder → Girdiyi işleyip yeni çıktı üretme**
-
-şeklinde özetlenebilir.
+**Örnek modeller:** T5, BART, mBART, Marian
 
 ---
 
-<a id="abdulkadir"></a>
-<a id="zafiyet-testleri"></a>
+### 2.5. Hangi Görevde Hangi Mimariyi Seçeriz?
+
+| Soru | Tercih |
+|---|---|
+| **Elimdeki metni anlamam / sınıflandırmam mı gerekiyor?** | **Encoder-only** |
+| **Yeni bir metin üretmem mi gerekiyor?** | **Decoder-only** |
+| **Bir giriş dizisini başka bir çıktı dizisine dönüştürmem mi gerekiyor?** | **Encoder-Decoder** |
+
+> **Hızlı hafıza kuralı:**  
+> **BERT = ANLA**  
+> **GPT = ÜRET**  
+> **T5 = ANLA + DÖNÜŞTÜR / ÜRET**
+
+---
+
+### 2.6. Uzun Dizilerde Attention Maliyeti
+
+Standart **full attention** yapısında her token birçok diğer tokenla ilişki kurduğu için attention matrisi dizi uzadıkça hızla büyür.
+
+Standart attention hesaplamasının maliyeti yaklaşık **O(n²)** düzeyindedir.
+
+Bu nedenle çok uzun metinlerde daha verimli özel attention yöntemleri geliştirilmiştir.
+
+| Yöntem | Temel fikir |
+|---|---|
+| **Longformer — Local Attention** | Her token bütün diziye değil, çoğunlukla yakınındaki bir pencereye bakar. |
+| **Reformer — LSH Attention** | Her Query için en ilgili Key’leri daha verimli bulmayı amaçlar. |
+| **Axial Positional Encodings** | Çok uzun dizilerde konum bilgisini daha verimli tutmayı hedefler. |
+
+Ana fikir: **Uzun dizilerde attention maliyetini azaltmak.**
+
+---
+
+### 2.7. Genel Özet
+
+Transformer tek bir sabit model değildir. Encoder ve decoder parçalarının nasıl kullanıldığına göre farklı mimari aileleri oluşur.
+
+| Model ailesi | Mimari | Temel amaç |
+|---|---|---|
+| **BERT tipi** | Encoder-only | Metni anlamak |
+| **GPT tipi** | Decoder-only | Metin üretmek |
+| **T5 tipi** | Encoder-Decoder | Girdiyi anlayıp yeni bir çıktı dizisine dönüştürmek |
+
+### Temel Teknik Noktalar
+
+1. **Self-Attention ve Q-K-V mantığı**
+2. `Attention(Q,K,V) = softmax(QKᵀ / √dₖ)V` formülünün sezgisi
+3. Transformer’ın RNN/LSTM’ye göre **eğitimde paralelleştirme avantajı**
+4. **Encoder-only / Decoder-only / Encoder-Decoder** farkları ve **BERT / GPT / T5** örnekleri
+
+---
+
+**Ana kaynaklar:** Hugging Face LLM Course — Chapter 1/4 **“How do Transformers work?”** ve Chapter 1/6 **“Transformer Architectures”**.
 
 ### 4.4 Abdulkadir Öcal · QA / Red-Teamer
 
