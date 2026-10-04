@@ -1963,9 +1963,7 @@ Bu sınavda bir seçenek listesinden doğru cevabı seçmeniz istenecektir. Dene
 **Soru 1:** Transformer mimarisindeki Self-Attention mekanizmasında, girdi kelimelerinin birbirleriyle olan ilişkisini hesaplamak için üç farklı vektör kullanılır: Query ($Q$), Key ($K$) ve Value ($V$). Geleneksel Seq2Seq modellerine kıyasla, bu üçlü matris çarpım yapısının (Scaled Dot-Product Attention) modele sağladığı en büyük mimari avantaj nedir ve matris çarpımı sonucunda elde edilen "Attention Score" neyi ifade eder?
 
 <details>
-<summary>Cevap ve Açıklamalar</summary>
-
-**Doğru Cevap:**
+<summary>Doğru Cevap</summary>
 
 Self-Attention mekanizması, geleneksel modellerin aksine metni kelime kelime değil **paralel** işleyerek donanımsal hız ve uzun metinlerde bağlamı kaybetmeme avantajı sağlar. Elde edilen "Attention Score" ise kısaca, bir kelimenin cümledeki diğer kelimelerle ne kadar anlamsal bağı olduğunu gösteren bir ağırlık dağılımıdır. 
 
@@ -1979,9 +1977,8 @@ Self-Attention mekanizması, geleneksel modellerin aksine metni kelime kelime de
 **Soru 2:** BERT gibi Encoder tabanlı modeller "Bi-directional" (çift yönlü) Attention kullanırken, GPT gibi Decoder tabanlı modeller "Masked" (maskeli) Attention kullanır. Masked Attention mekanizmasında maskeleme işlemi matematiksel olarak nasıl gerçekleştirilir ve bu işlemin mimarideki temel amacı nedir?
 
 <details>
-<summary>Cevap ve Açıklamalar</summary>
+<summary>Doğru Cevap</summary>
 
-**Doğru Cevap:**
 
 Masked Attention, modelin metin üretirken henüz yazılmamış olan "gelecekteki" kelimeleri görerek kopya çekmesini (veri sızıntısını) engellemek için kullanılan bir mekanizmadır. Bu engelleme işlemi, matematiksel olarak gelecekteki kelimelerin dikkat (attention) ağırlıklarının sıfırlanmasıyla yapılır.
 
@@ -1995,9 +1992,8 @@ Masked Attention, modelin metin üretirken henüz yazılmamış olan "gelecektek
 **Soru 3:** Modelin tek bir Attention mekanizması yerine Multi-Head Attention (Çoklu Dikkat Başlıkları) kullanması modelin öğrenme kapasitesini nasıl etkiler? Farklı "Head"lerin aynı anda çalışması ne tür bir bilginin yakalanmasını sağlar?
 
 <details>
-<summary>Cevap ve Açıklamalar</summary>
+<summary>Doğru Cevap</summary>
 
-**Doğru Cevap:**
 
 Multi-Head Attention, modelin aynı cümleyi eşzamanlı olarak farklı "uzmanlık" açılarından (örneğin dilbilgisi, duygu, anlamsal referanslar vb.) incelemesini sağlar. Bu sayede modelin tek bir noktaya odaklanıp diğer anlamları kaçırma riski ortadan kalkar ve öğrenme kapasitesi büyük ölçüde artar.
 
