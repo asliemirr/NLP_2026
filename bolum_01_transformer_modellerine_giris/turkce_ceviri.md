@@ -1965,8 +1965,11 @@ Bu sınavda bir seçenek listesinden doğru cevabı seçmeniz istenecektir. Dene
 <details>
 <summary>Cevap ve Açıklamalar</summary>
 
-**Doğru Cevap İçin Mimari Çözüm ve Detaylı Açıklama:**
+**Doğru Cevap:**
 
+Self-Attention mekanizması, geleneksel modellerin aksine metni kelime kelime değil **paralel** işleyerek donanımsal hız ve uzun metinlerde bağlamı kaybetmeme avantajı sağlar. Elde edilen "Attention Score" ise kısaca, bir kelimenin cümledeki diğer kelimelerle ne kadar anlamsal bağı olduğunu gösteren bir ağırlık dağılımıdır. 
+
+**Detaylar:**
 - **Mimari Avantaj:** Geleneksel Seq2Seq modelleri (RNN, LSTM) veriyi ardışık (sıralı) işlemek zorundadır; bu da uzun dizilimlerde bağlamın unutulmasına yol açar. Self-Attention mekanizması ise her bir token'ın cümledeki diğer tüm token'larla olan ilişkisini **paralel olarak tek seferde** matris çarpımlarıyla hesaplar. Bu yapı, hem donanım (GPU/TPU) seviyesinde yüksek işlem hızı sağlar hem de uzun mesafeli bağımlılıkları (long-term dependencies) veri kaybı olmaksızın yakalama imkanı sunar.
 - **Attention Score'un Anlamı:** $Q$ (Query) ve $K^T$ (Key matrisinin transpozu) çarpıldıktan sonra sonuçların Softmax fonksiyonundan geçirilmesiyle elde edilen skordur. Bu skor, incelenen kelimenin (Query) cümledeki diğer kelimelerden (Key) ne oranda bilgi (Value) alması gerektiğini belirten **matematiksel bir olasılık dağılımını** ifade eder.
 
@@ -1978,8 +1981,11 @@ Bu sınavda bir seçenek listesinden doğru cevabı seçmeniz istenecektir. Dene
 <details>
 <summary>Cevap ve Açıklamalar</summary>
 
-**Doğru Cevap İçin Mimari Çözüm ve Detaylı Açıklama:**
+**Doğru Cevap:**
 
+Masked Attention, modelin metin üretirken henüz yazılmamış olan "gelecekteki" kelimeleri görerek kopya çekmesini (veri sızıntısını) engellemek için kullanılan bir mekanizmadır. Bu engelleme işlemi, matematiksel olarak gelecekteki kelimelerin dikkat (attention) ağırlıklarının sıfırlanmasıyla yapılır.
+
+**Detaylar:**
 - **Matematiksel Gerçekleştirim:** Masked Attention uygulamasında, matris çarpımı ($Q \times K^T$) sonucunda ortaya çıkan skor matrisinin üst üçgen kısmı (henüz üretilmemiş olan, gelecekteki token'lara denk gelen kısımlar) $-\infty$ (eksi sonsuz) veya çok büyük negatif değerlerle değiştirilir (maskelenir). Bu matris Softmax işlemine sokulduğunda, $e^{-\infty}$ matematiksel olarak $0$'a yaklaşacağından, bu gelecek kelimelerin dikkat (attention) ağırlığı tamamen sıfırlanmış olur.
 - **Temel Amaç:** Bu işlemin mimarideki yegane amacı, modelin otoregresif olarak (kelime kelime) metin üretirken gelecekteki kelimeleri görüp hile yapmasını (**veri sızıntısı / data leakage**) kesin bir şekilde önlemektir. Böylelikle model, bir sonraki kelimeyi tahmin ederken yalnızca kendisinden önceki (solundaki ve mevcut) bağlama odaklanmaya zorlanır.
 
@@ -1991,8 +1997,11 @@ Bu sınavda bir seçenek listesinden doğru cevabı seçmeniz istenecektir. Dene
 <details>
 <summary>Cevap ve Açıklamalar</summary>
 
-**Doğru Cevap İçin Mimari Çözüm ve Detaylı Açıklama:**
+**Doğru Cevap:**
 
+Multi-Head Attention, modelin aynı cümleyi eşzamanlı olarak farklı "uzmanlık" açılarından (örneğin dilbilgisi, duygu, anlamsal referanslar vb.) incelemesini sağlar. Bu sayede modelin tek bir noktaya odaklanıp diğer anlamları kaçırma riski ortadan kalkar ve öğrenme kapasitesi büyük ölçüde artar.
+
+**Detaylar:**
 - **Öğrenme Kapasitesine Etkisi:** Multi-Head Attention, tüm dikkat ağırlıklarının tek bir anlamsal yöne odaklanması kısıtını aşar. Girdi vektörleri, farklı ve daha düşük boyutlu **alt uzaylara (subspaces)** yansıtılarak (project edilerek) paralel olarak incelenir. Bu yaklaşım, modelin temsil gücünü (representation power) zenginleştirir ve öğrenme kapasitesini katlayarak artırır.
 - **Yakalanan Bilgi Türleri:** Farklı "Head"ler (başlıklar) birbirinden bağımsız çalışarak cümlenin farklı anlamsal ve sözdizimsel özelliklerini öğrenir. Örneğin; bir başlık yalnızca özne-yüklem uyumuna bakarken, başka bir başlık zamirlerin hangi isimleri işaret ettiğini (coreference) takip edebilir, bir diğeri ise metnin duygusal tonuna odaklanabilir. Bu paralellik sayesinde insan dilinin çok boyutlu ve karmaşık yapısı, matematiksel olarak çok daha isabetli bir biçimde modellenmiş olur.
 
