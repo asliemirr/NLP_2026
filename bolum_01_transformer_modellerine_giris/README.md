@@ -9,14 +9,6 @@ Bu klasör, [Hugging Face LLM Course](https://huggingface.co/learn/llm-course/ch
 1. [Takım ve Görev Dağılımı](#takim)
 2. [Klasör Yapısı](#klasor-yapisi)
 3. [Ortam Kurulumu ve Çalıştırma](#kurulum)
-4. [Teorik Notlar ve Kod Açıklamaları](#notlar)
-   - [Özge Sayınbaş · 1/1, 1/2, 1/10](#ozge)
-   - [Himmet Can Umutlu · 1/3, 1/5, 1/8](#himmet)
-   - [Simay Evin · 1/4, 1/6](#simay)
-   - [Abdulkadir Öcal · 1/9](#abdulkadir)
-   - [Sıla Taşan · 1/7, 1/11](#sila)
-
----
 
 <a id="takim"></a>
 
