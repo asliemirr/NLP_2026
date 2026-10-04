@@ -1756,7 +1756,7 @@ Bu bölümde oluşturduğunuz temel, sonraki kısımlarda daha ileri düzey konu
 * **D)** Tekrarlayan Sinir Ağı (Recurrent Neural Network - RNN)
 
 <details>
-<summary>▼ Cevap ve açıklamalar</summary>
+<summary> Cevap ve açıklamalar</summary>
 
 **Doğru cevap: C**
 
@@ -1774,7 +1774,7 @@ Bu bölümde oluşturduğunuz temel, sonraki kısımlarda daha ileri düzey konu
 * **D)** token-classification
 
 <details>
-<summary>▼ Cevap ve açıklamalar</summary>
+<summary>  Cevap ve açıklamalar</summary>
 
 **Doğru cevap: C**
 
@@ -1792,7 +1792,7 @@ Bu bölümde oluşturduğunuz temel, sonraki kısımlarda daha ileri düzey konu
 * **D)** Üretici Çekişmeli Ağlar (GAN), Varyasyonel Otoenkoderler (VAE), Difüzyon Modelleri (Diffusion Models)
 
 <details>
-<summary>▼ Cevap ve açıklamalar</summary>
+<summary>  Cevap ve açıklamalar</summary>
 
 **Doğru cevap: C**
 
@@ -1810,7 +1810,7 @@ Bu bölümde oluşturduğunuz temel, sonraki kısımlarda daha ileri düzey konu
 * **D)** Çıktıda halihazırda görünmüş olan token'lara uygulanan cezayı.
 
 <details>
-<summary>▼ Cevap ve açıklamalar</summary>
+<summary>  Cevap ve açıklamalar</summary>
 
 **Doğru cevap: C**
 
@@ -1828,7 +1828,7 @@ Bu bölümde oluşturduğunuz temel, sonraki kısımlarda daha ileri düzey konu
 * **D)** Girdi bağlamının dikkat edilecek en alakalı kısımlarını otomatik olarak seçmek.
 
 <details>
-<summary>▼ Cevap ve açıklamalar</summary>
+<summary>  Cevap ve açıklamalar</summary>
 
 **Doğru cevap: C**
 
@@ -1846,7 +1846,7 @@ Bu bölümde oluşturduğunuz temel, sonraki kısımlarda daha ileri düzey konu
 * **D)** Girdi Gömme, Dikkat Hesaplama, Çıktı Çözme
 
 <details>
-<summary>▼ Cevap ve açıklamalar</summary>
+<summary>  Cevap ve açıklamalar</summary>
 
 **Doğru cevap: B**
 
@@ -1863,7 +1863,7 @@ Bu bölümde oluşturduğunuz temel, sonraki kısımlarda daha ileri düzey konu
 * **D)** Sınırlı uygulanabilirlik, yalnızca temel anahtar kelime tespiti için yararlı olması.
 
 <details>
-<summary>▼ Cevap ve açıklamalar</summary>
+<summary>  Cevap ve açıklamalar</summary>
 
 **Doğru cevap: C**
 
@@ -1880,7 +1880,7 @@ Bu bölümde oluşturduğunuz temel, sonraki kısımlarda daha ileri düzey konu
 * **D)** NLP modelleri genellikle daha büyüktür ve LLM'lerden daha fazla veri gerektirir.
 
 <details>
-<summary>▼ Cevap ve açıklamalar</summary>
+<summary>  Cevap ve açıklamalar</summary>
 
 **Doğru cevap: B**
 
@@ -1898,7 +1898,7 @@ Bu bölümde oluşturduğunuz temel, sonraki kısımlarda daha ileri düzey konu
 * **D)** Dikkat (Attention) Hesaplama ve Softmax Uygulaması
 
 <details>
-<summary>▼ Cevap ve açıklamalar</summary>
+<summary>  Cevap ve açıklamalar</summary>
 
 **Doğru cevap: B**
 
@@ -1915,7 +1915,7 @@ Bu bölümde oluşturduğunuz temel, sonraki kısımlarda daha ileri düzey konu
 * **D)** Maskeli Dil Modelleme (Masked Language Modeling - MLM)
 
 <details>
-<summary>▼ Cevap ve açıklamalar</summary>
+<summary>  Cevap ve açıklamalar</summary>
 
 **Doğru cevap: D**
 
@@ -1933,7 +1933,7 @@ Bu sınavda bir seçenek listesinden doğru cevabı seçmeniz istenecektir. Dene
 **Soru 1:** Transformer mimarisindeki Self-Attention mekanizmasında, girdi kelimelerinin birbirleriyle olan ilişkisini hesaplamak için üç farklı vektör kullanılır: Query ($Q$), Key ($K$) ve Value ($V$). Geleneksel Seq2Seq modellerine kıyasla, bu üçlü matris çarpım yapısının (Scaled Dot-Product Attention) modele sağladığı en büyük mimari avantaj nedir ve matris çarpımı sonucunda elde edilen "Attention Score" neyi ifade eder?
 
 <details>
-<summary>▼ Cevap ve açıklamalar</summary>
+<summary>  Cevap ve açıklamalar</summary>
 
 **Mimari Çözüm ve Detaylı Açıklama:** 
 * **Avantaj:** Geleneksel Seq2Seq modelleri (RNN, LSTM vb.) veriyi sıralı işlemek zorundadır ve uzun cümlelerde bağlamı unuturlar. Self-Attention mekanizması ise her bir kelimenin cümledeki diğer tüm kelimelerle olan ilişkisini matris çarpımı ile **paralel olarak tek seferde** hesaplamaya olanak tanır. Bu da hem donanım (GPU) tarafında devasa bir hızlanma hem de sınırsız bağlam yakalama yeteneği sağlar.
@@ -1944,7 +1944,7 @@ Bu sınavda bir seçenek listesinden doğru cevabı seçmeniz istenecektir. Dene
 **Soru 2:** BERT gibi Encoder tabanlı modeller "Bi-directional" (çift yönlü) Attention kullanırken, GPT gibi Decoder tabanlı modeller "Masked" (maskeli) Attention kullanır. Masked Attention mekanizmasında maskeleme işlemi matematiksel olarak nasıl gerçekleştirilir ve bu işlemin mimarideki temel amacı nedir?
 
 <details>
-<summary>▼ Cevap ve açıklamalar</summary>
+<summary>  Cevap ve açıklamalar</summary>
 
 **Mimari Çözüm ve Detaylı Açıklama:** 
 * **Matematiksel Gerçekleştirim:** Masked Attention'da, matris çarpımı ($Q \times K^T$) sonucunda elde edilen skor matrisinin üst üçgen kısmı (yani henüz üretilmemiş, gelecekteki token'lara denk gelen hücreler) çok küçük bir değere, pratik olarak **eksi sonsuz ($-\infty$)** ile değiştirilir. Bu matris Softmax fonksiyonundan geçirildiğinde, $e^{-\infty}$ hesaplaması sıfıra yaklaşacağından, bu gelecek kelimelerin dikkat ağırlığı $0$'a dönüşür.
@@ -1955,7 +1955,7 @@ Bu sınavda bir seçenek listesinden doğru cevabı seçmeniz istenecektir. Dene
 **Soru 3:** Modelin tek bir Attention mekanizması yerine Multi-Head Attention (Çoklu Dikkat Başlıkları) kullanması modelin öğrenme kapasitesini nasıl etkiler? Farklı "Head"lerin aynı anda çalışması ne tür bir bilginin yakalanmasını sağlar?
 
 <details>
-<summary>▼ Cevap ve açıklamalar</summary>
+<summary>  Cevap ve açıklamalar</summary>
 
 **Mimari Çözüm ve Detaylı Açıklama:** 
 * **Öğrenme Kapasitesine Etkisi:** Multi-Head Attention, tek bir dikkat mekanizmasının ağırlıklarını tek bir yöne odaklaması problemini çözer. Model, girdi vektörlerini daha düşük boyutlu farklı **alt uzaylara (subspaces)** bölerek inceler. Bu, modelin öğrenme kapasitesini (representation power) ve paralel işleme yeteneğini katlayarak artırır.
