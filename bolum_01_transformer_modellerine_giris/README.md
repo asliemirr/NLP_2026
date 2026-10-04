@@ -173,6 +173,7 @@ Transformer modelleri üç ana türe ayrılır:
 <a id="himmet"></a>
 
 ### 4.2 Himmet Can Umutlu · Uygulama Kodlama Mühendisi
+
 <a id="k1-3"></a>
 
 #### 1/3 Özeti — Transformers Ne Yapabilir? (pipeline())
@@ -358,10 +359,14 @@ Transformer modelleri üç ana türe ayrılır:
   - İşlem süresi ∝ uzunluk (doğrusal).
 - **KV Cache (Anahtar-Değer Önbelleği)**: ara hesaplamaları depolayıp yeniden kullanır; tekrarlı hesabı azaltır, üretimi hızlandırır (bedeli ek bellek).
 
+---
+
 <a id="simay"></a>
 <a id="mimari-analiz"></a>
 
 ### 4.3 Simay Evin · Sistem Mimarı (Mimari ve Algoritma Analizi)
+
+<a id="k1-4"></a>
 
 #### 1/4 · Transformer'lar nasıl çalışır?
 
@@ -541,8 +546,10 @@ Bu nedenle Transformer:
 - Büyük veri kümeleri ve büyük modeller üzerinde daha verimli ölçeklenebilir.
 
 > **Önemli not:** Decoder-only modeller, çıktı üretimi sırasında tokenları yine sırayla üretir. Transformer'ın RNN/LSTM'ye göre paralelleştirme avantajı özellikle eğitim aşamasında belirgindir.
->
-> #### 1/6 · Transformer Mimarileri
+
+<a id="k1-6"></a>
+
+#### 1/6 · Transformer Mimarileri
 
 ##### 4. Transformer Mimari Aileleri
 
@@ -658,6 +665,43 @@ Transformer tabanlı modellerin temel mimari aileleri ise:
 - **T5 → Encoder-Decoder → Girdiyi işleyip yeni çıktı üretme**
 
 şeklinde özetlenebilir.
+
+---
+
+<a id="abdulkadir"></a>
+<a id="zafiyet-testleri"></a>
+
+### 4.4 Abdulkadir Öcal · QA / Red-Teamer
+
+<a id="k1-9"></a>
+
+#### 1/9 · Önyargı ve Sınırlar (Bias and Limitations) Özeti
+
+##### 1. Önceden Eğitilmiş Modellerin Doğası ve Veri Kaynağı
+
+* **Ham İnternet Verisi:** Büyük dil modelleri (BERT, GPT vb.), internet üzerinden taranmış devasa ham metin yığınlarıyla (web kazıma, forumlar, haber siteleri) ön eğitime (pre-training) tabi tutulur.
+* **Verinin Aynası Olma:** Modeller dünyayı insan gibi algılamaz veya tarafsız bir ahlak mekanizmasına sahip değildir. İnternetteki insan kaynaklı önyargılar, ırkçılık, cinsiyetçilik ve mesleki kalıp yargılar (stereotipler) doğrudan modelin olasılık dağılımına aktarılır.
+
+##### 2. İstatistiki Önyargı (Bias) Nasıl Ortaya Çıkar?
+
+* **Mask Filling Örneği:** Kurs dokümanı `fill-mask` pipeline'ı üzerinden BERT'e `"This man works as a [MASK]"` ve `"This woman works as a [MASK]"` cümlelerini verdiğinde; erkeğe *"lawyer, engineer, doctor"*, kadına ise *"waitress, nurse, teacher"* gibi kalıp mesleklerin en yüksek olasılıkla atandığını gösterir.
+* **İnce Ayar (Fine-Tuning) Yanılsaması:** Dokümanın en kritik uyarısı şudur: *"Modeli kendi özel verinizle fine-tune etmek, modelin temel mimarisindeki ve ön eğitimindeki bu kök önyargıları tamamen yok etmez; sadece üstünü örter."*
+
+##### 3. Üretim (Production) Ortamı Riskleri ve Sorumluluk
+
+* **Gerçek Dünya Tehlikesi:** Bir dil modelini doğrudan filtrelemeden müşteri hizmetlerine veya ürün öneri sistemine bağlamak; modelin nefret söylemi, ayrımcılık veya kendinden emin halüsinasyonlar üretmesine yol açabilir.
+* **Geliştiricinin Görevi:** NLP mühendisinin görevi sadece model eğitmek değil; bu modelleri canlıya almadan önce adli bilişim (red-teaming) testlerinden geçirmek ve sınırlarını raporlamaktır.
+
+##### Bölüm 1.9 ile Notebook Deneylerinin Eşleşmesi
+
+| Bölüm 1.9 Teorik Kuralı | Notebook'ta Kanıtlanan Deney |
+| --- | --- |
+| **Cinsiyet / Kalıp Yargı (Stereotype)** | BERT mask-filling ile meslek/cinsiyet softmax olasılık karşılaştırması |
+| **Doğruluk Sınırı / Yanılsama** | GPT-2'ye tarihte olmayan olay sorarak üretilen karınca algoritması halüsinasyonu |
+| **Güvenlik / Kontrol Edilebilirlik** | Prompt Injection ile sistem kuralının bypass edilmesi denemesi |
+| **Mimari / Bellek Sınırı (Attention)** | `truncation=False` ile 1024 token limitinin aşılıp `IndexError` patlatılması |
+
+---
 
 <a id="sila"></a>
 
