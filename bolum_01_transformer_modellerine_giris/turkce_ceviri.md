@@ -1,9 +1,5 @@
 # Hugging Face LLM Kursu · Bölüm 1: Transformer Modelleri — Türkçe Çeviri
 
-**Hazırlayan:** Özge Sayınbaş (Dokümantasyon Yöneticisi & Çeviri Sorumlusu) · NLP_2026
-
-Bu dosya, [Hugging Face LLM Course](https://huggingface.co/learn/llm-course/chapter1/1) 1. bölümünün 11 alt bölümünün tamamının resmî Türkçe çevirisidir. Çeviri kaynağa birebir sadıktır; kod blokları, çıktılar, bağlantılar ve görseller orijinaliyle aynıdır. İçerik, orijinal kurs gibi Apache License 2.0 kapsamındadır (orijinal metin © Hugging Face).
-
 ## İçindekiler
 
 1. [1/1 · Giriş](#bolum-1)
