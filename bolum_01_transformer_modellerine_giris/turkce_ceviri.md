@@ -50,10 +50,10 @@ Kursa kısa bir genel bakış:
 <img src="https://huggingface.co/datasets/huggingface-course/documentation-images/resolve/main/en/chapter1/summary.svg" alt="Kurs bölümlerine kısa bir genel bakış.">
 </div>
 
-- 1. ile 4. bölümler, 🤗 Transformers kütüphanesinin temel kavramlarına giriş niteliğindedir. Kursun bu kısmının sonunda Transformer modellerinin nasıl çalıştığını öğrenmiş olacak; [Hugging Face Hub](https://huggingface.co/models)'dan bir modeli nasıl kullanacağınızı, bir veri kümesi (dataset) üzerinde nasıl ince ayar (fine-tuning) yapacağınızı ve sonuçlarınızı Hub'da nasıl paylaşacağınızı bileceksiniz!
-- 5. ile 8. bölümler, klasik NLP görevlerine ve LLM tekniklerine geçmeden önce 🤗 Datasets ve 🤗 Tokenizers kütüphanelerinin temellerini öğretir. Bu kısmın sonunda en yaygın dil işleme problemlerini kendi başınıza çözebilecek hâle geleceksiniz.
-- 9. bölüm, NLP'nin ötesine geçerek modellerinize ait demoları 🤗 Hub üzerinde nasıl oluşturup paylaşacağınızı ele alır. Bu kısmın sonunda 🤗 Transformers uygulamanızı dünyaya sergilemeye hazır olacaksınız!
-- 10. ile 12. bölümler; ince ayar, yüksek kaliteli veri kümelerinin derlenmesi ve akıl yürütme (reasoning) modellerinin oluşturulması gibi ileri düzey LLM konularına odaklanır.
+- 1\. ile 4. bölümler, 🤗 Transformers kütüphanesinin temel kavramlarına giriş niteliğindedir. Kursun bu kısmının sonunda Transformer modellerinin nasıl çalıştığını öğrenmiş olacak; [Hugging Face Hub](https://huggingface.co/models)'dan bir modeli nasıl kullanacağınızı, bir veri kümesi (dataset) üzerinde nasıl ince ayar (fine-tuning) yapacağınızı ve sonuçlarınızı Hub'da nasıl paylaşacağınızı bileceksiniz!
+- 5\. ile 8. bölümler, klasik NLP görevlerine ve LLM tekniklerine geçmeden önce 🤗 Datasets ve 🤗 Tokenizers kütüphanelerinin temellerini öğretir. Bu kısmın sonunda en yaygın dil işleme problemlerini kendi başınıza çözebilecek hâle geleceksiniz.
+- 9\. bölüm, NLP'nin ötesine geçerek modellerinize ait demoları 🤗 Hub üzerinde nasıl oluşturup paylaşacağınızı ele alır. Bu kısmın sonunda 🤗 Transformers uygulamanızı dünyaya sergilemeye hazır olacaksınız!
+- 10\. ile 12. bölümler; ince ayar, yüksek kaliteli veri kümelerinin derlenmesi ve akıl yürütme (reasoning) modellerinin oluşturulması gibi ileri düzey LLM konularına odaklanır.
 
 Bu kurs:
 
