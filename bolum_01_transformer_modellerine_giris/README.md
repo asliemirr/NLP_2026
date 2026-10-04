@@ -77,8 +77,6 @@ Bu bölümde her takım üyesinin kendi konularına ait teorik notları ve kod a
 
 #### 1/1 · Giriş
 
-> Kaynak: [huggingface.co/learn/llm-course/chapter1/1](https://huggingface.co/learn/llm-course/chapter1/1)
-
 Bu kurs, Hugging Face ekosistemindeki Transformers, Datasets, Tokenizers ve Accelerate kütüphaneleri ile Hugging Face Hub'ı kullanarak büyük dil modellerini (LLM) ve doğal dil işlemeyi (NLP) öğretir. İlk bölümde, metin üretimi ve sınıflandırma gibi NLP görevlerinin `pipeline()` fonksiyonuyla nasıl çözüldüğü, Transformer mimarisi ve encoder, decoder ve encoder-decoder mimarilerinin farkları ile kullanım alanları ele alınır.
 
 **Doğal Dil İşleme (NLP)**, bilgisayarların insan dilini anlamasını, yorumlamasını ve üretmesini sağlayan geniş bir alandır. Duygu analizi (sentiment analysis), adlandırılmış varlık tanıma (Named Entity Recognition, NER) ve makine çevirisi (machine translation) bu alanın görevlerine örnektir.
@@ -94,8 +92,6 @@ Kısacası NLP geniş bir alandır; LLM ise bu alanın en güçlü araçlarında
 <a id="k1-2"></a>
 
 #### 1/2 · Doğal Dil İşleme ve Büyük Dil Modelleri
-
-> Kaynak: [huggingface.co/learn/llm-course/chapter1/2](https://huggingface.co/learn/llm-course/chapter1/2)
 
 **NLP**, dilbilim ile makine öğrenmesinin kesişiminde yer alır ve kelimeleri bağlamlarıyla birlikte anlamayı amaçlar. Başlıca görevleri şunlardır:
 
