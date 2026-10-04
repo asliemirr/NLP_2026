@@ -1750,179 +1750,209 @@ Bu bölümde oluşturduğunuz temel, sonraki kısımlarda daha ileri düzey konu
 
 
 **Soru 1:** Çeviri veya özetleme gibi diziden-diziye (sequence-to-sequence) görevler için genellikle hangi tür Transformer mimarisi en uygundur?
-* **A)** Sadece Kodlayıcı (Encoder-only, örn. BERT)
-* **B)** Sadece Çözücü (Decoder-only, örn. GPT)
-* **C)** Kodlayıcı-Çözücü (Encoder-decoder, örn. T5, BART)
-* **D)** Tekrarlayan Sinir Ağı (Recurrent Neural Network - RNN)
+- **A)** Sadece Kodlayıcı (Encoder-only, örn. BERT)
+- **B)** Sadece Çözücü (Decoder-only, örn. GPT)
+- **C)** Kodlayıcı-Çözücü (Encoder-decoder, örn. T5, BART)
+- **D)** Tekrarlayan Sinir Ağı (Recurrent Neural Network - RNN)
 
 <details>
-<summary> Cevap ve açıklamalar</summary>
+<summary>Cevap ve Açıklamalar</summary>
 
-**Doğru cevap: C**
+**Doğru Cevap: C**
 
-* **A)** Sadece kodlayıcı (Encoder-only) modeller, metin üretmek için değil; cümlenin tamamını anlayıp sınıflandırma gibi görevler yapmak için uygundur.
-* **B)** Sadece çözücü (Decoder-only) modeller, çeviri gibi çift yönlü bağlam gerektiren işlemlerden ziyade, serbest metin üretimi için tasarlanmıştır.
-* **C)** Kodlayıcı-Çözücü (Encoder-decoder) modeller, bir girdi dizisini alıp (anlayıp) tamamen yeni bir çıktı dizisi üretmeyi gerektiren çeviri ve özetleme görevleri için en uygun mimaridir.
-* **D)** Tekrarlayan Sinir Ağları (RNN), bir Transformer mimarisi türü değildir; eski nesil sıralı işleme ağlarıdır.
+**Detaylı Açıklama:**
+
+- **A)** Sadece kodlayıcı (Encoder-only) modeller, metin üretmek için değil; cümlenin tamamını anlayıp sınıflandırma gibi görevler yapmak için uygundur.
+- **B)** Sadece çözücü (Decoder-only) modeller, çeviri gibi çift yönlü bağlam gerektiren işlemlerden ziyade, serbest metin üretimi için tasarlanmıştır.
+- **C)** Kodlayıcı-Çözücü (Encoder-decoder) modeller, bir girdi dizisini alıp (anlayıp) tamamen yeni bir çıktı dizisi üretmeyi gerektiren çeviri ve özetleme görevleri için en uygun mimaridir.
+- **D)** Tekrarlayan Sinir Ağları (RNN), bir Transformer mimarisi türü değildir; eski nesil sıralı işleme ağlarıdır.
+
 </details>
 <br>
 
 **Soru 2:** Hangi Hugging Face pipeline'ı, bu belirli etiketler üzerinde önceden ince ayar (fine-tuning) gerektirmeden, çıkarım (inference) anında sağlanan rastgele etiketleri kullanarak metin sınıflandırmaya olanak tanır?
-* **A)** text-classification
-* **B)** sentiment-analysis
-* **C)** zero-shot-classification
-* **D)** token-classification
+- **A)** text-classification
+- **B)** sentiment-analysis
+- **C)** zero-shot-classification
+- **D)** token-classification
 
 <details>
-<summary>  Cevap ve açıklamalar</summary>
+<summary>Cevap ve Açıklamalar</summary>
 
-**Doğru cevap: C**
+**Doğru Cevap: C**
 
-* **A)** Text-classification pipeline'ı, modelin eğitim aşamasında gördüğü sabit etiketlere ihtiyaç duyar.
-* **B)** Sentiment-analysis genellikle sadece "olumlu/olumsuz" gibi önceden belirlenmiş duygu etiketleriyle çalışır.
-* **C)** Zero-shot-classification, modelin önceden hiç eğitilmediği, kullanıcının çıkarım anında belirlediği yepyeni etiket kategorileriyle metni anında sınıflandırmasını sağlayan özel bir mekanizmadır.
-* **D)** Token-classification, metnin bütününü değil, kelimeleri tek tek sınıflandırmak (örn: varlık ismi tanıma - NER) için kullanılır.
+**Detaylı Açıklama:**
+
+- **A)** Text-classification pipeline'ı, modelin eğitim aşamasında gördüğü sabit etiketlere ihtiyaç duyar.
+- **B)** Sentiment-analysis genellikle sadece "olumlu/olumsuz" gibi önceden belirlenmiş duygu etiketleriyle çalışır.
+- **C)** Zero-shot-classification, modelin önceden hiç eğitilmediği, kullanıcının çıkarım anında belirlediği yepyeni etiket kategorileriyle metni anında sınıflandırmasını sağlayan özel bir mekanizmadır.
+- **D)** Token-classification, metnin bütününü değil, kelimeleri tek tek sınıflandırmak (örn: varlık ismi tanıma - NER) için kullanılır.
+
 </details>
 <br>
 
 **Soru 3:** Transformer modelleri için yaygın olarak kullanılan üç ana mimari kategori hangileridir?
-* **A)** Evrişimli Sinir Ağları (CNN), Tekrarlayan Sinir Ağları (RNN), Dikkat Ağları (Attention Networks)
-* **B)** Küçük ölçekli, Orta ölçekli, Büyük ölçekli
-* **C)** Sadece Kodlayıcı (Encoder-only), Sadece Çözücü (Decoder-only), Kodlayıcı-Çözücü (Encoder-decoder / Sequence-to-sequence)
-* **D)** Üretici Çekişmeli Ağlar (GAN), Varyasyonel Otoenkoderler (VAE), Difüzyon Modelleri (Diffusion Models)
+- **A)** Evrişimli Sinir Ağları (CNN), Tekrarlayan Sinir Ağları (RNN), Dikkat Ağları (Attention Networks)
+- **B)** Küçük ölçekli, Orta ölçekli, Büyük ölçekli
+- **C)** Sadece Kodlayıcı (Encoder-only), Sadece Çözücü (Decoder-only), Kodlayıcı-Çözücü (Encoder-decoder / Sequence-to-sequence)
+- **D)** Üretici Çekişmeli Ağlar (GAN), Varyasyonel Otoenkoderler (VAE), Difüzyon Modelleri (Diffusion Models)
 
 <details>
-<summary>  Cevap ve açıklamalar</summary>
+<summary>Cevap ve Açıklamalar</summary>
 
-**Doğru cevap: C**
+**Doğru Cevap: C**
 
-* **A)** CNN ve RNN, Transformer tabanlı olmayan farklı sinir ağı mimarileridir.
-* **B)** Bu sınıflandırma, modellerin mimarisini değil, yalnızca parametre boyutlarını ifade eder.
-* **C)** Transformer mimarisi temelde metni anlayan (Encoder), metin üreten (Decoder) ve her ikisini birleştiren (Encoder-decoder) olmak üzere üç ana türeve ayrılır.
-* **D)** GAN, VAE ve Difüzyon modelleri genellikle doğal dil işleme için değil, görsel/ses üretimi için kullanılan mimarilerdir.
+**Detaylı Açıklama:**
+
+- **A)** CNN ve RNN, Transformer tabanlı olmayan farklı sinir ağı mimarileridir.
+- **B)** Bu sınıflandırma, modellerin mimarisini değil, yalnızca parametre boyutlarını ifade eder.
+- **C)** Transformer mimarisi temelde metni anlayan (Encoder), metin üreten (Decoder) ve her ikisini birleştiren (Encoder-decoder) olmak üzere üç ana türeve ayrılır.
+- **D)** GAN, VAE ve Difüzyon modelleri genellikle doğal dil işleme için değil, görsel/ses üretimi için kullanılan mimarilerdir.
+
 </details>
 <br>
 
 **Soru 4:** Büyük Dil Modeli (LLM) çıkarımında (inference), 'sıcaklık' (temperature) örnekleme parametresi temel olarak neyi kontrol eder?
-* **A)** Üretilecek maksimum token sayısını.
-* **B)** Göz önünde bulundurulan alternatif dizi sayısını (beam width).
-* **C)** Çıktının rastgeleliğini/yaratıcılığını (düşük değerler daha odaklı/belirlenimci, yüksek değerler daha rastgeledir).
-* **D)** Çıktıda halihazırda görünmüş olan token'lara uygulanan cezayı.
+- **A)** Üretilecek maksimum token sayısını.
+- **B)** Göz önünde bulundurulan alternatif dizi sayısını (beam width).
+- **C)** Çıktının rastgeleliğini/yaratıcılığını (düşük değerler daha odaklı/belirlenimci, yüksek değerler daha rastgeledir).
+- **D)** Çıktıda halihazırda görünmüş olan token'lara uygulanan cezayı.
 
 <details>
-<summary>  Cevap ve açıklamalar</summary>
+<summary>Cevap ve Açıklamalar</summary>
 
-**Doğru cevap: C**
+**Doğru Cevap: C**
 
-* **A)** Maksimum token sayısı `max_new_tokens` veya `max_length` parametreleriyle kontrol edilir.
-* **B)** Alternatif dizi sayısı `num_beams` parametresiyle (Beam Search) kontrol edilir.
-* **C)** Sıcaklık (temperature) değeri Softmax fonksiyonundaki olasılık dağılımını manipüle ederek modelin daha çeşitli/yaratıcı veya daha sabit/garantici cevaplar vermesini sağlar.
-* **D)** Bu işlem `repetition_penalty` (tekrarlama cezası) parametresiyle yapılır.
+**Detaylı Açıklama:**
+
+- **A)** Maksimum token sayısı `max_new_tokens` veya `max_length` parametreleriyle kontrol edilir.
+- **B)** Alternatif dizi sayısı `num_beams` parametresiyle (Beam Search) kontrol edilir.
+- **C)** Sıcaklık (temperature) değeri Softmax fonksiyonundaki olasılık dağılımını manipüle ederek modelin daha çeşitli/yaratıcı veya daha sabit/garantici cevaplar vermesini sağlar.
+- **D)** Bu işlem `repetition_penalty` (tekrarlama cezası) parametresiyle yapılır.
+
 </details>
 <br>
 
 **Soru 5:** LLM çıkarımı sırasında kullanılan Key-Value (KV) Cache optimizasyonunun temel amacı nedir?
-* **A)** Başlangıç komutunu işlemenin (prefill aşaması) hesaplama maliyetini azaltmak.
-* **B)** Ağırlıklarını sıkıştırarak modelin bellek ayak izini azaltmak.
-* **C)** Önceki adımlardaki ara dikkat (attention) hesaplamalarını depolayıp yeniden kullanarak token üretimini (decode aşaması) hızlandırmak.
-* **D)** Girdi bağlamının dikkat edilecek en alakalı kısımlarını otomatik olarak seçmek.
+- **A)** Başlangıç komutunu işlemenin (prefill aşaması) hesaplama maliyetini azaltmak.
+- **B)** Ağırlıklarını sıkıştırarak modelin bellek ayak izini azaltmak.
+- **C)** Önceki adımlardaki ara dikkat (attention) hesaplamalarını depolayıp yeniden kullanarak token üretimini (decode aşaması) hızlandırmak.
+- **D)** Girdi bağlamının dikkat edilecek en alakalı kısımlarını otomatik olarak seçmek.
 
 <details>
-<summary>  Cevap ve açıklamalar</summary>
+<summary>Cevap ve Açıklamalar</summary>
 
-**Doğru cevap: C**
+**Doğru Cevap: C**
 
-* **A)** Prefill aşaması paralelizasyon ile hızlandırılır, KV Cache'in asıl faydası bu aşamadan sonra başlar.
-* **B)** Ağırlıkları sıkıştırma işlemi "Quantization" (Nicemleme) optimizasyonunun görevidir.
-* **C)** KV Cache, modelin her yeni token üretirken geçmiş tokenların matris değerlerini baştan hesaplamasını önler. Bu değerler önbellekte (cache) tutularak çok ciddi bir hız ve verimlilik artışı elde edilir.
-* **D)** Bu doğrudan Attention mekanizmasının kendi matematiksel görevidir.
+**Detaylı Açıklama:**
+
+- **A)** Prefill aşaması paralelizasyon ile hızlandırılır, KV Cache'in asıl faydası bu aşamadan sonra başlar.
+- **B)** Ağırlıkları sıkıştırma işlemi "Quantization" (Nicemleme) optimizasyonunun görevidir.
+- **C)** KV Cache, modelin her yeni token üretirken geçmiş tokenların matris değerlerini baştan hesaplamasını önler. Bu değerler önbellekte (cache) tutularak çok ciddi bir hız ve verimlilik artışı elde edilir.
+- **D)** Bu doğrudan Attention mekanizmasının kendi matematiksel görevidir.
+
 </details>
 <br>
 
 **Soru 6:** Bir Hugging Face `pipeline()` fonksiyonu, girdi metnini çıkarım için işlerken tipik olarak hangi üç ana üst düzey adımı gerçekleştirir?
-* **A)** Tokenizasyon, Model Eğitimi, Metin Üretimi
-* **B)** Ön işleme (Preprocessing), Model Çıkarımı (Model Inference), Son işleme (Postprocessing)
-* **C)** Veri Yükleme, Model İnce Ayarı, Kontrol Noktası Kaydetme
-* **D)** Girdi Gömme, Dikkat Hesaplama, Çıktı Çözme
+- **A)** Tokenizasyon, Model Eğitimi, Metin Üretimi
+- **B)** Ön işleme (Preprocessing), Model Çıkarımı (Model Inference), Son işleme (Postprocessing)
+- **C)** Veri Yükleme, Model İnce Ayarı, Kontrol Noktası Kaydetme
+- **D)** Girdi Gömme, Dikkat Hesaplama, Çıktı Çözme
 
 <details>
-<summary>  Cevap ve açıklamalar</summary>
+<summary>Cevap ve Açıklamalar</summary>
 
-**Doğru cevap: B**
+**Doğru Cevap: B**
 
-* **A ve C)** Pipeline fonksiyonu model eğitimi (training) veya ince ayarı (fine-tuning) yapmak için değil, halihazırda eğitilmiş modeli kullanmak için tasarlanmıştır.
-* **B)** Pipeline sırasıyla metni sayılara çevirir (Preprocessing/Tokenization), bu sayıları modele verip tahmin alır (Inference) ve modelin ürettiği ham çıktıları insanın okuyabileceği metin formatına geri döndürür (Postprocessing).
-* **D)** Bunlar model mimarisinin içindeki düşük seviyeli matematiksel hesaplama adımlarıdır.
+**Detaylı Açıklama:**
+
+- **A ve C)** Pipeline fonksiyonu model eğitimi (training) veya ince ayarı (fine-tuning) yapmak için değil, halihazırda eğitilmiş modeli kullanmak için tasarlanmıştır.
+- **B)** Pipeline sırasıyla metni sayılara çevirir (Preprocessing/Tokenization), bu sayıları modele verip tahmin alır (Inference) ve modelin ürettiği ham çıktıları insanın okuyabileceği metin formatına geri döndürür (Postprocessing).
+- **D)** Bunlar model mimarisinin içindeki düşük seviyeli matematiksel hesaplama adımlarıdır.
+
 </details>
 <br>
 
 **Soru 7:** Aşağıdakilerden hangisi Büyük Dil Modellerinin (LLM'ler) önemli bir sınırlaması olarak kabul edilir?
-* **A)** Çeviri veya özetleme gibi görevleri yerine getirememesi.
-* **B)** Akıcı ve dilbilgisi açısından doğru metin üretmede zorluk çekmesi.
-* **C)** Kendinden emin bir şekilde yanlış veya anlamsız bilgiler üretme potansiyeli (halüsinasyonlar).
-* **D)** Sınırlı uygulanabilirlik, yalnızca temel anahtar kelime tespiti için yararlı olması.
+- **A)** Çeviri veya özetleme gibi görevleri yerine getirememesi.
+- **B)** Akıcı ve dilbilgisi açısından doğru metin üretmede zorluk çekmesi.
+- **C)** Kendinden emin bir şekilde yanlış veya anlamsız bilgiler üretme potansiyeli (halüsinasyonlar).
+- **D)** Sınırlı uygulanabilirlik, yalnızca temel anahtar kelime tespiti için yararlı olması.
 
 <details>
-<summary>  Cevap ve açıklamalar</summary>
+<summary>Cevap ve Açıklamalar</summary>
 
-**Doğru cevap: C**
+**Doğru Cevap: C**
 
-* **A ve B)** Büyük Dil Modelleri çeviri, özetleme ve son derece akıcı, dilbilgisi kurallarına uygun metin üretme konusunda çok başarılıdır.
-* **C)** Modeller gerçek dünyayı doğrudan algılamazlar, istatistiksel token olasılıkları üretirler. Bu durum, tamamen yanlış veya uydurma bir bilgiyi son derece mantıklı ve doğruymuş gibi sunmalarına (halüsinasyon) yol açan en büyük sınırlamadır.
-* **D)** LLM'ler anahtar kelime tespitinin çok ötesinde mantıksal yürütme ve çoklu görev yeteneklerine sahiptir.
+**Detaylı Açıklama:**
+
+- **A ve B)** Büyük Dil Modelleri çeviri, özetleme ve son derece akıcı, dilbilgisi kurallarına uygun metin üretme konusunda çok başarılıdır.
+- **C)** Modeller gerçek dünyayı doğrudan algılamazlar, istatistiksel token olasılıkları üretirler. Bu durum, tamamen yanlış veya uydurma bir bilgiyi son derece mantıklı ve doğruymuş gibi sunmalarına (halüsinasyon) yol açan en büyük sınırlamadır.
+- **D)** LLM'ler anahtar kelime tespitinin çok ötesinde mantıksal yürütme ve çoklu görev yeteneklerine sahiptir.
+
 </details>
 <br>
 
 **Soru 8:** Daha geniş bir alan olan Doğal Dil İşleme (NLP) ile Büyük Dil Modelleri (LLM'ler) arasındaki temel fark nedir?
-* **A)** NLP metin üretimine odaklanırken, LLM'ler metin sınıflandırmasına odaklanır.
-* **B)** NLP daha geniş bir alandır, LLM'ler ise boyutları ve genel yetenekleriyle bilinen güçlü bir alt kümesidir.
-* **C)** LLM'ler tüm uygulamalar için göreve özel eğitim gerektirirken, NLP modelleri gerektirmez.
-* **D)** NLP modelleri genellikle daha büyüktür ve LLM'lerden daha fazla veri gerektirir.
+- **A)** NLP metin üretimine odaklanırken, LLM'ler metin sınıflandırmasına odaklanır.
+- **B)** NLP daha geniş bir alandır, LLM'ler ise boyutları ve genel yetenekleriyle bilinen güçlü bir alt kümesidir.
+- **C)** LLM'ler tüm uygulamalar için göreve özel eğitim gerektirirken, NLP modelleri gerektirmez.
+- **D)** NLP modelleri genellikle daha büyüktür ve LLM'lerden daha fazla veri gerektirir.
 
 <details>
-<summary>  Cevap ve açıklamalar</summary>
+<summary>Cevap ve Açıklamalar</summary>
 
-**Doğru cevap: B**
+**Doğru Cevap: B**
 
-* **A)** Her ikisi de hem metin üretimi hem de sınıflandırma yapabilir.
-* **B)** NLP (Doğal Dil İşleme), dilbilimi ve yapay zekayı birleştiren devasa bir bilimsel şemsiye alandır. LLM'ler (Büyük Dil Modelleri), derin öğrenme teknikleriyle oluşturulmuş ve bu geniş alanın sadece bir parçası olan devasa boyutlu spesifik ağ mimarileridir.
-* **C)** Tam tersine, LLM'ler zero-shot (sıfır atış) yetenekleri sayesinde göreve özel eğitim olmadan da birçok görevi başarabilir.
-* **D)** LLM'ler (Large Language Models) adından da anlaşılacağı üzere geleneksel NLP modellerinden çok daha büyük parametrelere sahiptir ve daha fazla veri gerektirir.
+**Detaylı Açıklama:**
+
+- **A)** Her ikisi de hem metin üretimi hem de sınıflandırma yapabilir.
+- **B)** NLP (Doğal Dil İşleme), dilbilimi ve yapay zekayı birleştiren devasa bir bilimsel şemsiye alandır. LLM'ler (Büyük Dil Modelleri), derin öğrenme teknikleriyle oluşturulmuş ve bu geniş alanın sadece bir parçası olan devasa boyutlu spesifik ağ mimarileridir.
+- **C)** Tam tersine, LLM'ler zero-shot (sıfır atış) yetenekleri sayesinde göreve özel eğitim olmadan da birçok görevi başarabilir.
+- **D)** LLM'ler (Large Language Models) adından da anlaşılacağı üzere geleneksel NLP modellerinden çok daha büyük parametrelere sahiptir ve daha fazla veri gerektirir.
+
 </details>
 <br>
 
 **Soru 9:** Bir komut aldıktan sonra metin üretmek için Büyük Dil Modeli (LLM) çıkarım sürecinde (inference process) tipik olarak yer alan iki farklı aşama nelerdir?
-* **A)** Model Derleme ve Nicemleme
-* **B)** Ön Doldurma / Prefill (komutu işleme) ve Çözme / Decode (sıralı olarak token üretme)
-* **C)** Tokenizasyon ve Gömme (Embedding) Araması
-* **D)** Dikkat (Attention) Hesaplama ve Softmax Uygulaması
+- **A)** Model Derleme ve Nicemleme
+- **B)** Ön Doldurma / Prefill (komutu işleme) ve Çözme / Decode (sıralı olarak token üretme)
+- **C)** Tokenizasyon ve Gömme (Embedding) Araması
+- **D)** Dikkat (Attention) Hesaplama ve Softmax Uygulaması
 
 <details>
-<summary>  Cevap ve açıklamalar</summary>
+<summary>Cevap ve Açıklamalar</summary>
 
-**Doğru cevap: B**
+**Doğru Cevap: B**
 
-* **A)** Bu işlemler modelin çalışma anı (inference) değil, optimizasyon aşamasıyla ilgilidir.
-* **B)** Metin üretim süreci iki aşamalıdır: Model önce kullanıcının girdiği istemin tamamını aynı anda işleyerek bağlamı anlar (Prefill aşaması). Ardından yanıtı verirken kelimeleri oto-regresif olarak tek tek ardışık şekilde oluşturmaya başlar (Decode aşaması).
-* **C ve D)** Bu seçenekler, prefill ve decode aşamalarının içinde gerçekleşen mikro işlemlerdir, ana süreç aşamaları değildir.
+**Detaylı Açıklama:**
+
+- **A)** Bu işlemler modelin çalışma anı (inference) değil, optimizasyon aşamasıyla ilgilidir.
+- **B)** Metin üretim süreci iki aşamalıdır: Model önce kullanıcının girdiği istemin tamamını aynı anda işleyerek bağlamı anlar (Prefill aşaması). Ardından yanıtı verirken kelimeleri oto-regresif olarak tek tek ardışık şekilde oluşturmaya başlar (Decode aşaması).
+- **C ve D)** Bu seçenekler, prefill ve decode aşamalarının içinde gerçekleşen mikro işlemlerdir, ana süreç aşamaları değildir.
+
 </details>
 <br>
 
 **Soru 10:** Girdideki token'ları maskelemeyi ve modeli orijinal token'ları tahmin etmesi için eğitmeyi içeren, genellikle BERT gibi kodlayıcı (encoder) modelleriyle ilişkilendirilen ön eğitim hedefi hangisidir?
-* **A)** Nedensel Dil Modelleme (Causal Language Modeling - CLM)
-* **B)** Diziden-Diziye Çeviri (Sequence-to-Sequence Translation)
-* **C)** Sonraki Cümle Tahmini (Next Sentence Prediction - NSP)
-* **D)** Maskeli Dil Modelleme (Masked Language Modeling - MLM)
+- **A)** Nedensel Dil Modelleme (Causal Language Modeling - CLM)
+- **B)** Diziden-Diziye Çeviri (Sequence-to-Sequence Translation)
+- **C)** Sonraki Cümle Tahmini (Next Sentence Prediction - NSP)
+- **D)** Maskeli Dil Modelleme (Masked Language Modeling - MLM)
 
 <details>
-<summary>  Cevap ve açıklamalar</summary>
+<summary>Cevap ve Açıklamalar</summary>
 
-**Doğru cevap: D**
+**Doğru Cevap: D**
 
-* **A)** CLM, maskeleme yapmadan yalnızca bir sonraki kelimeyi tahmin etmeye dayanan (genellikle GPT gibi Decoder modellerin kullandığı) yöntemdir.
-* **B)** Seq2Seq, çeviri görevleri için uygulanan bir hedeftir.
-* **C)** NSP, BERT'in kullandığı diğer bir hedef olsa da maskelemeyi değil, iki cümlenin ardışık olup olmadığını tahmin etmeyi içerir.
-* **D)** Masked Language Modeling (MLM), cümlenin içindeki rastgele kelimelerin kapatılarak (maskelenerek) modelin o boşluğa gelecek doğru kelimeyi sağdan ve soldan gelen çift yönlü bağlama bakarak bulmasını sağlayan BERT ön eğitim tekniğidir.
+**Detaylı Açıklama:**
+
+- **A)** CLM, maskeleme yapmadan yalnızca bir sonraki kelimeyi tahmin etmeye dayanan (genellikle GPT gibi Decoder modellerin kullandığı) yöntemdir.
+- **B)** Seq2Seq, çeviri görevleri için uygulanan bir hedeftir.
+- **C)** NSP, BERT'in kullandığı diğer bir hedef olsa da maskelemeyi değil, iki cümlenin ardışık olup olmadığını tahmin etmeyi içerir.
+- **D)** Masked Language Modeling (MLM), cümlenin içindeki rastgele kelimelerin kapatılarak (maskelenerek) modelin o boşluğa gelecek doğru kelimeyi sağdan ve soldan gelen çift yönlü bağlama bakarak bulmasını sağlayan BERT ön eğitim tekniğidir.
+
 </details>
 <br>
 
@@ -1933,32 +1963,38 @@ Bu sınavda bir seçenek listesinden doğru cevabı seçmeniz istenecektir. Dene
 **Soru 1:** Transformer mimarisindeki Self-Attention mekanizmasında, girdi kelimelerinin birbirleriyle olan ilişkisini hesaplamak için üç farklı vektör kullanılır: Query ($Q$), Key ($K$) ve Value ($V$). Geleneksel Seq2Seq modellerine kıyasla, bu üçlü matris çarpım yapısının (Scaled Dot-Product Attention) modele sağladığı en büyük mimari avantaj nedir ve matris çarpımı sonucunda elde edilen "Attention Score" neyi ifade eder?
 
 <details>
-<summary>  Cevap ve açıklamalar</summary>
+<summary>Cevap ve Açıklamalar</summary>
 
-**Mimari Çözüm ve Detaylı Açıklama:** 
-* **Avantaj:** Geleneksel Seq2Seq modelleri (RNN, LSTM vb.) veriyi sıralı işlemek zorundadır ve uzun cümlelerde bağlamı unuturlar. Self-Attention mekanizması ise her bir kelimenin cümledeki diğer tüm kelimelerle olan ilişkisini matris çarpımı ile **paralel olarak tek seferde** hesaplamaya olanak tanır. Bu da hem donanım (GPU) tarafında devasa bir hızlanma hem de sınırsız bağlam yakalama yeteneği sağlar.
-* **Attention Score:** $Q$ ve $K^T$ matrislerinin çarpılması ve ardından Softmax fonksiyonundan geçirilmesiyle elde edilen bu skor, o an işlenen kelimenin (Query), cümledeki diğer kelimelerden (Key) ne kadar ağırlık/bağlam (Value) alması gerektiğini belirleyen **matematiksel bir olasılık dağılımını** ifade eder.
+**Doğru Cevap İçin Mimari Çözüm ve Detaylı Açıklama:**
+
+- **Mimari Avantaj:** Geleneksel Seq2Seq modelleri (RNN, LSTM) veriyi ardışık (sıralı) işlemek zorundadır; bu da uzun dizilimlerde bağlamın unutulmasına yol açar. Self-Attention mekanizması ise her bir token'ın cümledeki diğer tüm token'larla olan ilişkisini **paralel olarak tek seferde** matris çarpımlarıyla hesaplar. Bu yapı, hem donanım (GPU/TPU) seviyesinde yüksek işlem hızı sağlar hem de uzun mesafeli bağımlılıkları (long-term dependencies) veri kaybı olmaksızın yakalama imkanı sunar.
+- **Attention Score'un Anlamı:** $Q$ (Query) ve $K^T$ (Key matrisinin transpozu) çarpıldıktan sonra sonuçların Softmax fonksiyonundan geçirilmesiyle elde edilen skordur. Bu skor, incelenen kelimenin (Query) cümledeki diğer kelimelerden (Key) ne oranda bilgi (Value) alması gerektiğini belirten **matematiksel bir olasılık dağılımını** ifade eder.
+
 </details>
 <br>
 
 **Soru 2:** BERT gibi Encoder tabanlı modeller "Bi-directional" (çift yönlü) Attention kullanırken, GPT gibi Decoder tabanlı modeller "Masked" (maskeli) Attention kullanır. Masked Attention mekanizmasında maskeleme işlemi matematiksel olarak nasıl gerçekleştirilir ve bu işlemin mimarideki temel amacı nedir?
 
 <details>
-<summary>  Cevap ve açıklamalar</summary>
+<summary>Cevap ve Açıklamalar</summary>
 
-**Mimari Çözüm ve Detaylı Açıklama:** 
-* **Matematiksel Gerçekleştirim:** Masked Attention'da, matris çarpımı ($Q \times K^T$) sonucunda elde edilen skor matrisinin üst üçgen kısmı (yani henüz üretilmemiş, gelecekteki token'lara denk gelen hücreler) çok küçük bir değere, pratik olarak **eksi sonsuz ($-\infty$)** ile değiştirilir. Bu matris Softmax fonksiyonundan geçirildiğinde, $e^{-\infty}$ hesaplaması sıfıra yaklaşacağından, bu gelecek kelimelerin dikkat ağırlığı $0$'a dönüşür.
-* **Temel Amaç:** Bu işlemin yegane amacı, modelin bir sonraki kelimeyi oto-regresif olarak tahmin ederken hile yapmasını ve gelecekteki kelimeleri görmesini (**data leakage / veri sızıntısı**) kesinlikle engellemektir. Böylece model sadece soldaki (geçmişteki) kelimelere odaklanmak zorunda bırakılır.
+**Doğru Cevap İçin Mimari Çözüm ve Detaylı Açıklama:**
+
+- **Matematiksel Gerçekleştirim:** Masked Attention uygulamasında, matris çarpımı ($Q \times K^T$) sonucunda ortaya çıkan skor matrisinin üst üçgen kısmı (henüz üretilmemiş olan, gelecekteki token'lara denk gelen kısımlar) $-\infty$ (eksi sonsuz) veya çok büyük negatif değerlerle değiştirilir (maskelenir). Bu matris Softmax işlemine sokulduğunda, $e^{-\infty}$ matematiksel olarak $0$'a yaklaşacağından, bu gelecek kelimelerin dikkat (attention) ağırlığı tamamen sıfırlanmış olur.
+- **Temel Amaç:** Bu işlemin mimarideki yegane amacı, modelin otoregresif olarak (kelime kelime) metin üretirken gelecekteki kelimeleri görüp hile yapmasını (**veri sızıntısı / data leakage**) kesin bir şekilde önlemektir. Böylelikle model, bir sonraki kelimeyi tahmin ederken yalnızca kendisinden önceki (solundaki ve mevcut) bağlama odaklanmaya zorlanır.
+
 </details>
 <br>
 
 **Soru 3:** Modelin tek bir Attention mekanizması yerine Multi-Head Attention (Çoklu Dikkat Başlıkları) kullanması modelin öğrenme kapasitesini nasıl etkiler? Farklı "Head"lerin aynı anda çalışması ne tür bir bilginin yakalanmasını sağlar?
 
 <details>
-<summary>  Cevap ve açıklamalar</summary>
+<summary>Cevap ve Açıklamalar</summary>
 
-**Mimari Çözüm ve Detaylı Açıklama:** 
-* **Öğrenme Kapasitesine Etkisi:** Multi-Head Attention, tek bir dikkat mekanizmasının ağırlıklarını tek bir yöne odaklaması problemini çözer. Model, girdi vektörlerini daha düşük boyutlu farklı **alt uzaylara (subspaces)** bölerek inceler. Bu, modelin öğrenme kapasitesini (representation power) ve paralel işleme yeteneğini katlayarak artırır.
-* **Yakalanan Bilgi Türleri:** Her bir "Head" (başlık) birbirinden bağımsız olarak cümlenin farklı bir karakteristiğini öğrenir. Tıpkı bir projede çalışan farklı uzmanlar gibi; eşzamanlı olarak bir başlık sadece özne-yüklem uyumuna, bir diğeri zamirlerin kime referans verdiğine, bir diğeri ise cümlenin duygusuna odaklanabilir. Bu sayede insan dilinin karmaşık ve çok katmanlı yapıları matematiksel olarak çok daha zengin bir şekilde temsil edilir.
+**Doğru Cevap İçin Mimari Çözüm ve Detaylı Açıklama:**
+
+- **Öğrenme Kapasitesine Etkisi:** Multi-Head Attention, tüm dikkat ağırlıklarının tek bir anlamsal yöne odaklanması kısıtını aşar. Girdi vektörleri, farklı ve daha düşük boyutlu **alt uzaylara (subspaces)** yansıtılarak (project edilerek) paralel olarak incelenir. Bu yaklaşım, modelin temsil gücünü (representation power) zenginleştirir ve öğrenme kapasitesini katlayarak artırır.
+- **Yakalanan Bilgi Türleri:** Farklı "Head"ler (başlıklar) birbirinden bağımsız çalışarak cümlenin farklı anlamsal ve sözdizimsel özelliklerini öğrenir. Örneğin; bir başlık yalnızca özne-yüklem uyumuna bakarken, başka bir başlık zamirlerin hangi isimleri işaret ettiğini (coreference) takip edebilir, bir diğeri ise metnin duygusal tonuna odaklanabilir. Bu paralellik sayesinde insan dilinin çok boyutlu ve karmaşık yapısı, matematiksel olarak çok daha isabetli bir biçimde modellenmiş olur.
+
 </details>
 
