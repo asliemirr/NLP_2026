@@ -1,202 +1,91 @@
-# Uygulama: Pipeline ve Çıkarım (Inference)
+# Pipeline ve Inference — Hugging Face Transformers
 
-**Hazırlayan:** Himmet Can Umutlu (Uygulama Kodlama Mühendisi)
+Bu depo, Hugging Face `transformers` kütüphanesiyle doğal dil işleme (NLP) temellerini uygulamalı olarak gösteren tek hücreli bir Jupyter Notebook (`pipeline_ve_inference.ipynb`) içerir. Notebook üç ana konuyu ele alır: **pipeline'lar**, **transformer mimarileri** ve **metin üretimi (inference)**.
 
-## Çalıştırma
+## İçerik
 
-`main.ipynb` dosyasını Jupyter Notebook veya Google Colab ile açıp **Kernel → Restart & Run All** ile baştan sona çalıştırın. Gerekli kütüphaneler ilk satırda kurulur:
+Notebook aşağıdaki bölümlerden oluşur:
+
+| Bölüm | Başlık | Açıklama |
+|-------|--------|----------|
+| 1 | Ortam ve Kurulum | Gerekli paketlerin kurulumu ve cihaz (CPU/GPU) tespiti |
+| 2 | Pipeline'lar (Bölüm 1/3) | Duygu analizi, sıfır-örnek sınıflandırma, maskeli kelime tahmini |
+| 3 | Transformer Mimarileri (Bölüm 1/5) | Encoder-only, Decoder-only ve Encoder-Decoder karşılaştırması |
+| 4 | Metin Üretimi ve Inference (Bölüm 1/8) | GPT-2 ile farklı üretim stratejileri ve sıcaklık (temperature) analizi |
+
+## Kullanılan Teknolojiler
+
+- **Python**
+- **PyTorch** — derin öğrenme altyapısı
+- **Hugging Face Transformers** — önceden eğitilmiş modeller ve pipeline API'si
+- **Matplotlib** — sıcaklık parametresinin olasılık dağılımına etkisinin görselleştirilmesi
+
+## Kullanılan Modeller
+
+- `distilbert-base-uncased-finetuned-sst-2-english` — duygu analizi
+- `facebook/bart-large-mnli` — sıfır-örnek sınıflandırma
+- `bert-base-uncased` — maskeli dil modeli (fill-mask)
+- `gpt2` — metin üretimi
+
+## Kurulum
+
+Gerekli bağımlılıkları yükleyin:
 
 ```bash
 pip install transformers torch accelerate matplotlib
 ```
 
-Modeller ilk çalıştırmada Hugging Face Hub'dan indirildiği için internet bağlantısı gerekir.
+## Kullanım
 
-## Notebook İçeriği
+Notebook'u Jupyter, Google Colab veya VS Code üzerinden açıp tüm hücreleri sırayla çalıştırmanız yeterlidir:
 
-| Bölüm | Konu | Ne yapılıyor? |
-|---|---|---|
-| Chapter 1/3: Pipelines | 1/3 | `pipeline()` ile duygu analizi, sıfır atışlı sınıflandırma ve maske doldurma |
-| Chapter 1/5: Transformer Architectures | 1/5 | Encoder, decoder ve encoder-decoder mimarilerinin karşılaştırma tablosu |
-| Chapter 1/8: Text Generation & Inference | 1/8 | GPT-2 ile greedy search, beam search, düşük/yüksek sıcaklık ve top-p stratejilerinin karşılaştırılması; sıcaklığın olasılık dağılımına etkisini gösteren grafik |
+```bash
+jupyter notebook pipeline_ve_inference.ipynb
+```
 
----
+Not: Modeller ilk çalıştırmada Hugging Face Hub'dan indirilir, bu nedenle internet bağlantısı gerekir. Daha hızlı indirme ve yüksek hız limitleri için `HF_TOKEN` ortam değişkeni tanımlanabilir.
 
-## 1/3 · Transformer'lar neler yapabilir?
+## Bölüm Detayları
 
-### pipeline() Fonksiyonunun Çalışma Mantığı
-- `pipeline()` 🤗 Transformers kütüphanesinin en temel nesnesidir.
-- Bir modeli, ön işleme (preprocessing) ve son işleme (postprocessing) adımlarıyla birleştirir.
-- Ham metni doğrudan girip anlaşılır bir yanıt almayı sağlar; iç detayları gizler.
-- Pipeline'a metin geçtiğinde 3 ana adım gerçekleşir:
-  1. Metin, modelin anlayacağı biçime **ön işlenir**.
-  2. Ön işlenmiş girdiler **modele iletilir**.
-  3. Modelin tahminleri, yorumlanabilir olması için **son işlenir**.
-- Varsayılan olarak göreve uygun, önceden eğitilmiş bir model otomatik seçilir.
-- Model, nesne ilk oluşturulduğunda indirilir ve **önbelleğe alınır**; sonraki çalıştırmalarda tekrar indirilmez.
-- `pipeline()` metin, görüntü, ses ve çok modlu (multimodal) görevleri destekler.
-- Hub'dan belirli bir model seçilebilir: `pipeline("text-generation", model="HuggingFaceTB/SmolLM2-360M")`.
+### 1. Pipeline'lar
 
-### Duygu Analizi (Sentiment Analysis)
-- `pipeline("sentiment-analysis")` ile yapılır.
-- Varsayılan model İngilizce duygu analizi için ince ayarlıdır.
-- Çıktı: `{'label': 'POSITIVE', 'score': 0.96}` biçiminde etiket + güven skoru.
-- Tek bir cümle veya **cümle listesi** (batch) verilebilir; liste hâlinde her cümle için ayrı sonuç döner.
+Hugging Face'in yüksek seviyeli `pipeline()` API'si ile üç farklı görev gösterilir:
 
-### Zero-shot Sınıflandırma
-- `pipeline("zero-shot-classification")` ile yapılır.
-- Etiketsiz metni, **ince ayar gerektirmeden** sınıflandırır.
-- `candidate_labels` parametresiyle etiket kümesini kullanıcı belirler (örn. `["education", "politics", "business"]`).
-- Modele ait hazır etiketlere bağımlı kalmazsınız; istediğiniz her etiket için olasılık skoru döndürür.
-- Etiket açıklamanın (annotation) zaman alıcı olduğu gerçek dünya senaryolarında güçlüdür.
+- **Duygu analizi** (`sentiment-analysis`): Verilen bir cümlenin pozitif/negatif duygusunu ve güven skorunu döndürür.
+- **Sıfır-örnek sınıflandırma** (`zero-shot-classification`): Modele önceden tanıtılmamış etiketler arasından en olası kategoriyi belirler.
+- **Maskeli kelime tahmini** (`fill-mask`): Cümledeki `[MASK]` token'ı için en olası kelime önerilerini skorlarıyla listeler.
 
-### Metin Üretimi (Text Generation)
-- `pipeline("text-generation")` ile yapılır.
-- Bir istem (prompt) verilir; model kalan metni otomatik tamamlar (tahminli metin benzeri).
-- Üretim **rastgelelik içerir**; aynı girdiyle aynı çıktı garanti değildir.
-- `num_return_sequences`: kaç farklı dizi üretileceği.
-- `max_length` / `min_length`: çıktının toplam uzunluğu.
-- Hub'dan belirli bir model (örn. `HuggingFaceTB/SmolLM2-360M`) aynı pipeline'a yüklenebilir.
-- Model Hub'daki widget ile model indirilmeden önce çevrimiçi test edilebilir.
+### 2. Transformer Mimarileri
 
-### Adlandırılmış Varlık Tanıma (NER)
-- `pipeline("ner", aggregation_strategy="simple")` ile yapılır.
-- Girdi metninde kişi (PER), kuruluş (ORG), konum (LOC) gibi varlıkları bulur.
-- Çıktı her varlık için `entity_group`, `score`, `word`, `start`, `end` bilgisi içerir.
-- `aggregation_strategy="simple"` aynı varlığa ait kelimeleri birleştirir (örn. "Hugging" + "Face" → tek ORG).
-- Ön işlemede kelimeler alt parçalara bölünebilir (örn. `Sylvain` → `S`, `##yl`, `##va`, `##in`); son işleme bunları yeniden gruplar.
+Üç temel mimarinin karşılaştırıldığı bir tablo sunulur:
 
-### Diğer Pipeline'lar (Kısa Bakış)
-- `fill-mask`: `<mask>` belirtecini doldurur; `top_k` kaç sonuç gösterileceğini belirler.
-- `question-answering`: Bağlamdan bilgi çekerek soruyu yanıtlar (yanıtı kendisi üretmez).
-- `summarization`: Metni, ana bilgileri koruyarak kısaltır.
-- `translation`: Diller arası çeviri (örn. `Helsinki-NLP/opus-mt-fr-en`).
-- Görüntü/ses: `image-classification`, `automatic-speech-recognition` gibi.
+| Mimari Tipi | Temel Mekanizma | Örnek Modeller | Kullanım Alanları |
+|-------------|-----------------|----------------|-------------------|
+| Encoder-only | Çift yönlü (bi-directional) öz-dikkat | BERT, RoBERTa | Cümle sınıflandırma, NER, soru-cevap |
+| Decoder-only | Tek yönlü (causal) maskeli öz-dikkat | GPT ailesi | Metin üretimi, yaratıcı yazım |
+| Encoder-Decoder | Çapraz dikkat katmanlı Seq2Seq | T5, BART | Çeviri, özetleme, üretim |
 
-## 1/5 · Transformer'lar görevleri nasıl çözer?
+### 3. Metin Üretimi ve Inference
 
-### Dil Modeli Eğitiminin İki Ana Yaklaşımı
-- **Maskelenmiş Dil Modelleme (MLM)** — Encoder (BERT):
-  - Girdideki bazı belirteçler rastgele maskelenir (`[MASK]`).
-  - Model, çevreleyen bağlamdan özgün belirteçleri tahmin eder.
-  - **İki yönlü (bidirectional) bağlam** öğrenir: maskelenen kelimenin hem öncesine hem sonrasına bakar.
-- **Nedensel Dil Modelleme (CLM)** — Decoder (GPT):
-  - Dizideki **tüm önceki belirteçlere** dayanarak bir sonraki belirteci tahmin eder.
-  - Yalnızca **soldan (önceki belirteçlerden)** gelen bağlamı kullanabilir.
-  - Metin üretiminin temeli: her seferinde sıradaki kelimeyi tahmin eder.
+GPT-2 modeli üzerinde beş farklı üretim stratejisi aynı girdi için denenir:
 
-### Encoder (BERT) vs Decoder (GPT) Ayrımı
-| Özellik | Encoder (BERT) | Decoder (GPT) |
-|---|---|---|
-| Bağlam yönü | İki yönlü (sağ + sol) | Tek yönlü (sadece sol) |
-| Eğitim hedefi | MLM + sonraki cümle tahmini | CLM (sonraki token) |
-| Dikkat türü | Tam öz-dikkat | Maskelenmiş öz-dikkat (geleceğe bakamaz) |
-| Tipik görevler | Sınıflandırma, NER, soru cevaplama | Metin üretimi, cümle tamamlama |
-| Belirteçleme | WordPiece | BPE (Bayt Çifti Kodlaması) |
+- **Greedy Search** — her adımda en yüksek olasılıklı token'ı seçer.
+- **Beam Search** — birden fazla aday diziyi paralel tutarak daha iyi sonuç arar.
+- **Düşük Sıcaklık (T=0.2)** — dağılımı keskinleştirir, daha belirleyici üretim.
+- **Yüksek Sıcaklık (T=1.5)** — dağılımı yumuşatır, daha çeşitli/yaratıcı üretim.
+- **Nucleus Sampling (p=0.9)** — kümülatif olasılığın %90'ını oluşturan token havuzundan örnekleme.
 
-### BERT (Encoder) Teknik Detayları
-- `[CLS]`: her dizinin başına eklenir; nihai çıktısı sınıflandırma başlığına gider.
-- `[SEP]`: cümleleri ayırmak için kullanılır.
-- Parça gömmesi (segment embedding): belirtecin cümle çiftinde 1. mi 2. mi cümlede olduğunu belirtir.
-- İki ön eğitim amacı:
-  1. **MLM**: belirli yüzde belirteç maskelenir, model tahmin eder (iki yönlülük "hile"sini çözer).
-  2. **Sonraki cümle tahmini (NSP)**: B cümlesi A'yı takip ediyor mu? (`IsNext` / `NotNext`)
-- Göreve göre üstüne bir **başlık (head)** eklenir: dizi sınıflandırma, belirteç sınıflandırma, span sınıflandırma.
-- Gizli durumlar doğrusal dönüşümle **logits'e** çevrilir; çapraz entropi kaybı hesaplanır.
+Ayrıca Matplotlib ile sıcaklık parametresinin softmax olasılık dağılımını nasıl değiştirdiği görselleştirilir.
 
-### GPT (Decoder) Teknik Detayları
-- BPE ile belirteçleme; her belirtece konumsal kodlama (positional encoding) eklenir.
-- Girdi gömmeleri birden çok **decoder bloğundan** geçer.
-- Her blokta **maskelenmiş öz-dikkat**: gelecekteki belirteçlere bakılamaz (dikkat maskesiyle skorları 0 yapılır).
-- Çıktı, gizli durumları logits'e çeviren **dil modelleme başlığına** gider.
-- Etiket, bir sonraki belirteçtir; logits'ler bir adım **sağa kaydırılır** ve çapraz entropi kaybı hesaplanır.
-- Ön eğitim amacı tamamen **nedensel dil modellemedir** (sonraki kelimeyi tahmin et).
+## Çıktı Örneği
 
-### Üç Mimari Kategori (Özet)
-- **Encoder-only** (BERT): derin anlama gerektiren görevler (sınıflandırma, NER, QA).
-- **Decoder-only** (GPT, Llama): metin üretimi, kod üretimi.
-- **Encoder-Decoder** (T5, BART): diziden diziye görevler (çeviri, özetleme).
-- Seçim kuralı: iki yönlü bağlam → encoder; üretim → decoder; dizi→dizi → encoder-decoder.
+Duygu analizi örneği:
 
-### BART (Encoder-Decoder) Notu
-- Kodlayıcısı BERT'e benzer; girdiyi **bozar** ve kod çözücüyle yeniden oluşturur.
-- En iyi bozma stratejisi **metin doldurma (text infilling)**: bir span tek `[mask]` ile değiştirilir.
-- Kodlayıcı çıktısı, kod çözücüye ek bağlam sağlar; kod çözücü otoregresif üretir.
+```
+Sentiment Analysis Input: 'This Google Colab notebook for the NLP assignment is incredibly helpful and easy to follow!'
+Output: [{'label': 'POSITIVE', 'score': 0.999...}]
+```
 
-## 1/8 · LLM'lerle çıkarım
+## Lisans
 
-### Temel Kavramlar
-- **Çıkarım (inference)**: eğitilmiş LLM'in verilen istemden (prompt) insan benzeri metin üretme süreci.
-- Model, yanıtı **her seferinde bir token** üretir; milyarlarca parametreden öğrendiği olasılıklara dayanır.
-- **Dikkat (attention)**: bir sonraki token'ı tahmin ederken en ilgili kelimelere odaklanma yeteneği.
-- **Bağlam uzunluğu**: modelin bir seferde işleyebildiği maksimum token sayısı ("dikkat süresi"/çalışma belleği).
-  - Mimari, hesaplama kaynakları, girdi/çıktı karmaşıklığı ile sınırlıdır.
-
-### İki Aşamalı Çıkarım Süreci
-
-#### 1. Prefill (Ön Doldurma) Aşaması
-- "Yanıt yazmadan önce paragrafın tamamını okumak" gibidir.
-- Üç adım:
-  1. **Tokenizasyon**: girdi metnini token'lara dönüştürme.
-  2. **Gömme (embedding)**: token'ları anlam taşıyan sayısal vektörlere çevirme.
-  3. **Başlangıç işleme**: gömme vektörlerini modelin sinir ağlarından geçirerek bağlamı anlama.
-- **Hesaplama yoğun**: tüm girdi token'ları aynı anda (paralel) işlenir.
-- İlk token gecikmesini (TTFT) büyük ölçüde bu aşama belirler.
-
-#### 2. Decode (Kod Çözme / Üretim) Aşaması
-- Gerçek metin üretiminin gerçekleştiği yer.
-- **Otoregresif (autoregressive)**: her yeni token önceki tüm token'lara bağlıdır.
-- Her yeni token için tekrarlanan adımlar:
-  1. **Dikkat hesaplaması**: önceki token'lara geri bakma.
-  2. **Olasılık hesaplaması**: her olası sonraki token'ın olabilirliğini bulma.
-  3. **Token seçimi**: olasılıklara göre bir sonraki token'ı seçme.
-  4. **Devam kontrolü**: üretmeye devam mı, durma mı (EOS)?
-- **Bellek yoğun**: daha önce üretilen tüm token'lar ve ilişkileri takip edilir.
-
-### Örnekleme Stratejileri (Token Seçimi)
-- Model, sözlükteki her kelime için **ham logits** (işlenmemiş olasılıklar) üretir.
-
-#### Temperature (Sıcaklık)
-- "Yaratıcılık kadranı": olasılık dağılımını daraltır/genişletir.
-- **> 1.0**: daha rastgele, yaratıcı, çeşitli seçimler.
-- **< 1.0**: daha odaklı ve deterministik (keskin dağılım).
-- **Greedy Search (açgözlü arama)**: her adımda en yüksek olasılıklı token'ı (argmax) seçme; sıcaklığın en deterministik uç noktası. Hızlı ama tekrara ve sığ sonuçlara yatkındır.
-
-#### Top-k Filtreleme
-- Yalnızca **en olası k** sonraki token dikkate alınır; kalanı elenir.
-- Dağılım bu k token'a göre yeniden normalize edilir.
-
-#### Top-p (Nucleus) Örnekleme
-- Sabit sayı yerine, kümülatif olasılığı bir eşiğe (örn. %90) ulaşana kadar en olası kelimeler seçilir.
-- Top-k'ya göre dağılımın şekline daha uyumludur; dinamik aday kümesi oluşturur.
-
-### Tekrarı Yönetmek (Penaltılar)
-- **Varlık cezası (presence penalty)**: daha önce görünmüş her token'a, sıklığına bakmaksızın **sabit** ceza.
-- **Sıklık cezası (frequency penalty)**: bir token ne kadar çok kullanıldıysa ceza o kadar **artar**.
-- Bu cezalar, diğer örnekleme stratejilerinden **önce** ham logits'lere uygulanır.
-
-### Üretim Uzunluğunu Kontrol Etmek
-- **Token sınırları**: min/maks token sayısı belirleme.
-- **Durdurma dizileri**: üretim sonunu işaretleyen desenler (örn. `"\n\n"`).
-- **EOS tespiti**: modelin yanıtı doğal yoldan bitirmesine izin verme (SmolLM2'de `<|im_end|>`).
-
-### Beam Search (Hüzme Araması)
-- Tek tek token kararı yerine **birden fazla aday yolu aynı anda** keşfeder (satranç gibi).
-- Adımlar:
-  1. Her adımda **birden fazla aday dizi** tut (tipik 5-10).
-  2. Her aday için sonraki token olasılıklarını hesapla.
-  3. En umut verici dizi + token kombinasyonlarını sakla.
-  4. İstenen uzunluğa / durma koşuluna kadar devam et.
-  5. **En yüksek toplam olasılıklı** diziyi seç.
-- Daha tutarlı ve dilbilgisel olarak doğru metin üretir, ancak **daha fazla hesaplama** gerektirir.
-
-### Pratik Zorluklar ve Optimizasyon
-- **Performans metrikleri**:
-  - TTFT (ilk token'a kadar geçen süre) — prefill'den etkilenir.
-  - TPOT (çıktı token'ı başına süre) — üretim hızını belirler.
-  - Throughput (verim) — aynı anda kaç istek.
-  - VRAM kullanımı — genellikle birincil kısıt.
-- **Bağlam uzunluğu maliyeti**:
-  - Bellek kullanımı ∝ uzunluk² (kuadratik).
-  - İşlem süresi ∝ uzunluk (doğrusal).
-- **KV Cache (Anahtar-Değer Önbelleği)**: ara hesaplamaları depolayıp yeniden kullanır; tekrarlı hesabı azaltır, üretimi hızlandırır (bedeli ek bellek).
+Bu proje eğitim amaçlıdır. Kullanılan önceden eğitilmiş modellerin lisans koşulları Hugging Face Hub'daki ilgili model sayfalarında belirtilmiştir.
