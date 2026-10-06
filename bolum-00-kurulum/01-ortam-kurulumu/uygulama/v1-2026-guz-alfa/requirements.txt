@@ -1,0 +1,19 @@
+# NLP 2026 - Temel Kütüphaneler ve Bağımlılıklar
+torch>=2.2.0
+transformers>=4.40.0
+datasets>=2.19.0
+tokenizers>=0.19.0
+accelerate>=0.30.0
+evaluate>=0.4.0
+scikit-learn>=1.4.0
+scipy>=1.12.0
+numpy>=1.26.0
+pandas>=2.2.0
+
+# Jupyter ve Etkileşimli Ortam
+jupyterlab>=4.1.0
+notebook>=7.1.0
+ipywidgets>=8.1.0
+
+# Hugging Face Hub Entegrasyonu
+huggingface-hub>=0.23.0
